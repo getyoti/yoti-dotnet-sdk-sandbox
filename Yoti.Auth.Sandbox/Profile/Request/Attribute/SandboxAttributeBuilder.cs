@@ -10,10 +10,6 @@ namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
         private bool _optional;
         private List<SandboxAnchor> _anchors;
 
-        internal SandboxAttributeBuilder()
-        {
-        }
-
         public SandboxAttributeBuilder WithName(string name)
         {
             _name = name;
