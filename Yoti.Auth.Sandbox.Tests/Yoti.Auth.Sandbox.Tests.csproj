@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Yoti.Auth.Sandbox\Yoti.Auth.Sandbox.csproj" />
-    <ProjectReference Include="..\Yoti.Auth.Sandbox\Yoti.Auth.Sandbox2.csproj" />
   </ItemGroup>
 
   <ItemGroup>

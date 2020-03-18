@@ -7,10 +7,8 @@ namespace Yoti.Auth.Tests.Common
     {
         public static AsymmetricCipherKeyPair Get()
         {
-            using (StreamReader stream = File.OpenText("test-key.pem"))
-            {
-                return CryptoEngine.LoadRsaKey(stream);
-            }
+            using StreamReader stream = File.OpenText("test-key.pem");
+            return CryptoEngine.LoadRsaKey(stream);
         }
     }
 }
