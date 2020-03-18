@@ -23,9 +23,9 @@ namespace Yoti.Auth.Sandbox.Profile
             return new SandboxClientBuilder();
         }
 
-        public SandboxClient(HttpClient httpClient, Uri apiUri, string appId, AsymmetricCipherKeyPair keyPair)
+        internal SandboxClient(HttpClient httpClient, Uri apiUri, string appId, AsymmetricCipherKeyPair keyPair)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClient ?? new HttpClient();
             _apiUri = apiUri ?? _defaultSandboxApiUrl;
             _appId = appId;
             _keyPair = keyPair;

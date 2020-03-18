@@ -28,17 +28,19 @@ namespace Yoti.Auth.Sandbox
                 handler.ServerCertificateCustomValidationCallback +=
                     (sender, cert, chain, sslPolicyErrors) => true;
 
-                using (var httpClient = new HttpClient(handler))
-                {
-                    _yotiSandboxClient = new SandboxClient(httpClient, _someUri, _someAppId, KeyPair.Get());
-                }
+                using var httpClient = new HttpClient(handler);
+                _yotiSandboxClient = new SandboxClientBuilder(httpClient)
+                    .WithApiUri(_someUri)
+                    .WithClientSdkId(_someAppId)
+                    .WithKeyPair(KeyPair.Get())
+                    .Build();
             }
 
             _yotiTokenRequest = new YotiTokenRequestBuilder().Build();
         }
 
         [Fact]
-        public static void BuilderShouldThrowForMissingAppId()
+        public static void BuilderShouldThrowForMissingSdkId()
         {
             var exception = Assert.Throws<ArgumentNullException>(() =>
             {
@@ -48,7 +50,7 @@ namespace Yoti.Auth.Sandbox
                 .Build();
             });
 
-            Assert.Contains("appId", exception.Message, StringComparison.Ordinal);
+            Assert.Contains("_sdkId", exception.Message, StringComparison.Ordinal);
         }
 
         [Fact]
@@ -58,7 +60,7 @@ namespace Yoti.Auth.Sandbox
             {
                 SandboxClient.Builder()
                 .WithApiUri(_someUri)
-                .ForApplication(_someAppId)
+                .WithClientSdkId(_someAppId)
                 .Build();
             });
 
@@ -66,24 +68,10 @@ namespace Yoti.Auth.Sandbox
         }
 
         [Fact]
-        public static void BuilderShouldThrowForMissingApiUri()
-        {
-            var exception = Assert.Throws<ArgumentNullException>(() =>
-            {
-                SandboxClient.Builder()
-                .ForApplication(_someAppId)
-                .WithKeyPair(KeyPair.Get())
-                .Build();
-            });
-
-            Assert.Contains("apiUri", exception.Message, StringComparison.Ordinal);
-        }
-
-        [Fact]
         public static void BuilderShouldCreateClient()
         {
             var sandboxClient = SandboxClient.Builder()
-                .ForApplication(_someAppId)
+                .WithClientSdkId(_someAppId)
                 .WithKeyPair(KeyPair.Get())
                 .WithApiUri(_someUri)
                 .Build();
@@ -120,15 +108,16 @@ namespace Yoti.Auth.Sandbox
                 SandboxClient yotiSandboxClient;
                 Mock<HttpMessageHandler> handlerMock = SetupMockMessageHandler(httpResponseMessage);
 
-                using (var httpClient = new HttpClient(handlerMock.Object))
-                {
-                    yotiSandboxClient = new SandboxClient(httpClient, null, _someAppId, KeyPair.Get());
+                using var httpClient = new HttpClient(handlerMock.Object);
+                yotiSandboxClient = new SandboxClientBuilder(httpClient)
+                    .WithClientSdkId(_someAppId)
+                    .WithKeyPair(KeyPair.Get())
+                    .Build();
 
-                    string result = yotiSandboxClient.SetupSharingProfile(
-                            _yotiTokenRequest);
+                string result = yotiSandboxClient.SetupSharingProfile(
+                        _yotiTokenRequest);
 
-                    Assert.Equal(tokenValue, result);
-                }
+                Assert.Equal(tokenValue, result);
             };
         }
 
@@ -144,18 +133,19 @@ namespace Yoti.Auth.Sandbox
                 SandboxClient yotiSandboxClient;
                 Mock<HttpMessageHandler> handlerMock = SetupMockMessageHandler(httpResponseMessage);
 
-                using (var httpClient = new HttpClient(handlerMock.Object))
+                using var httpClient = new HttpClient(handlerMock.Object);
+                yotiSandboxClient = new SandboxClientBuilder(httpClient)
+                    .WithClientSdkId(_someAppId)
+                    .WithKeyPair(KeyPair.Get())
+                    .Build();
+
+                var exception = Assert.Throws<SandboxException>(() =>
                 {
-                    yotiSandboxClient = new SandboxClient(httpClient, null, _someAppId, KeyPair.Get());
+                    yotiSandboxClient.SetupSharingProfile(
+                        _yotiTokenRequest);
+                });
 
-                    var exception = Assert.Throws<SandboxException>(() =>
-                    {
-                        yotiSandboxClient.SetupSharingProfile(
-                            _yotiTokenRequest);
-                    });
-
-                    Assert.Contains("Error when setting up sharing profile", exception.Message, StringComparison.Ordinal);
-                }
+                Assert.Contains("Error when setting up sharing profile", exception.Message, StringComparison.Ordinal);
             };
         }
 
