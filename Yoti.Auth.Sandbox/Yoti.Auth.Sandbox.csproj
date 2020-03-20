@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netcoreapp3.1;net48;</TargetFrameworks>
+    <Authors>Yoti</Authors>
+    <Description>Yoti .NET SDK Sandbox</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Yoti.png</PackageIcon>
+    <RepositoryUrl>https://github.com/getyoti/yoti-dotnet-sdk-sandbox</RepositoryUrl>
+    <PackageTags>yoti 2FA multifactor authentication verification identity login register verify 2Factor sdk sandbox documents docs KYC AML sandbox</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageId>Yoti.Sandbox</PackageId>
+    <PackageProjectUrl>https://developers.yoti.com/yoti-app/web-integration</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Yoti.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Yoti" Version="3.3.1" />
+  </ItemGroup>
+</Project>
