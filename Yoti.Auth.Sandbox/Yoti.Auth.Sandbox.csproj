@@ -11,7 +11,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <PackageId>Yoti.Sandbox</PackageId>
     <PackageProjectUrl>https://developers.yoti.com/yoti-app/web-integration</PackageProjectUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
