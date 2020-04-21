@@ -61,6 +61,33 @@ namespace Yoti.Auth.Sandbox.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error when setting up Doc Scan application response.
+        /// </summary>
+        internal static string DocScanApplicationResponseError {
+            get {
+                return ResourceManager.GetString("DocScanApplicationResponseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error when setting up Doc Scan session response.
+        /// </summary>
+        internal static string DocScanSessionResponseError {
+            get {
+                return ResourceManager.GetString("DocScanSessionResponseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error setting response config. for session.
+        /// </summary>
+        internal static string SessionResponseConfigError {
+            get {
+                return ResourceManager.GetString("SessionResponseConfigError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error when setting up sharing profile.
         /// </summary>
         internal static string SharingProfileError {
