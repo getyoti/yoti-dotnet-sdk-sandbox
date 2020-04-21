@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using Org.BouncyCastle.Crypto;
 
-namespace Yoti.Auth.Sandbox.Profile
+namespace Yoti.Auth.Sandbox.DocScan.Request
 {
     public class SandboxClientBuilder
     {
