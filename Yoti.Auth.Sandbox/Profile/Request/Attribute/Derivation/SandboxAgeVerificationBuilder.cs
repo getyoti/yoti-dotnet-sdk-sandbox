@@ -56,6 +56,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.Attribute.Derivation
         public SandboxAgeVerificationBuilder WithAnchors(List<SandboxAnchor> anchors)
         {
             Validation.NotNull(anchors, nameof(anchors));
+            Validation.CollectionNotEmpty(anchors, nameof(anchors));
             _anchors = anchors;
             return this;
         }

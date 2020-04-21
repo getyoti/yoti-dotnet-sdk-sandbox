@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Yoti.Auth.Exceptions;
 
 namespace Yoti.Auth.Sandbox
 {
-    [Serializable]
-    public class SandboxException : Exception
+    public class SandboxException : YotiException
     {
         public SandboxException()
         {
@@ -17,11 +16,6 @@ namespace Yoti.Auth.Sandbox
 
         public SandboxException(string message, Exception innerException)
             : base(message, innerException)
-        {
-        }
-
-        protected SandboxException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
     }

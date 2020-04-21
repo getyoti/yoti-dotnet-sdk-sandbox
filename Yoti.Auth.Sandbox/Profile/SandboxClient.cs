@@ -14,8 +14,8 @@ namespace Yoti.Auth.Sandbox.Profile
         private const string _yotiSandboxPathPrefix = "/sandbox/v1";
         private readonly Uri _defaultSandboxApiUrl = new Uri(Constants.Api.DefaultYotiHost + _yotiSandboxPathPrefix);
         private readonly HttpClient _httpClient;
-        private readonly Uri _apiUri;
-        private readonly string _appId;
+        private readonly Uri _sandboxApiUri;
+        private readonly string _sdkId;
         private readonly AsymmetricCipherKeyPair _keyPair;
 
         public static SandboxClientBuilder Builder()
@@ -23,11 +23,11 @@ namespace Yoti.Auth.Sandbox.Profile
             return new SandboxClientBuilder();
         }
 
-        internal SandboxClient(HttpClient httpClient, Uri apiUri, string appId, AsymmetricCipherKeyPair keyPair)
+        internal SandboxClient(string sdkId, AsymmetricCipherKeyPair keyPair, Uri apiUri = null, HttpClient httpClient = null)
         {
             _httpClient = httpClient ?? new HttpClient();
-            _apiUri = apiUri ?? _defaultSandboxApiUrl;
-            _appId = appId;
+            _sandboxApiUri = apiUri ?? _defaultSandboxApiUrl;
+            _sdkId = sdkId;
             _keyPair = keyPair;
         }
 
@@ -35,22 +35,29 @@ namespace Yoti.Auth.Sandbox.Profile
         {
             try
             {
-                string serializedTokenRequest = JsonConvert.SerializeObject(yotiTokenRequest);
+                string serializedTokenRequest = JsonConvert.SerializeObject(
+                    yotiTokenRequest,
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
+
                 byte[] body = Encoding.UTF8.GetBytes(serializedTokenRequest);
 
                 Yoti.Auth.Web.Request request = new RequestBuilder()
                     .WithKeyPair(_keyPair)
-                    .WithBaseUri(_apiUri)
-                    .WithEndpoint($"/apps/{_appId}/tokens")
+                    .WithBaseUri(_sandboxApiUri)
+                    .WithEndpoint($"/apps/{_sdkId}/tokens")
                     .WithHttpMethod(HttpMethod.Post)
                     .WithContent(body)
+                    .WithContentHeader(Constants.Api.ContentTypeHeader, Constants.Api.ContentTypeJson)
                     .Build();
 
                 HttpResponseMessage response = request.Execute(_httpClient).Result;
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Yoti.Auth.Web.Response.CreateExceptionFromStatusCode<SandboxException>(response);
+                    Yoti.Auth.Web.Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
                 }
 
                 YotiTokenResponse yotiTokenResponse =

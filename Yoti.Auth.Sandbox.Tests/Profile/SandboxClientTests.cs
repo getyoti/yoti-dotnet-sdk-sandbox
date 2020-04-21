@@ -3,25 +3,22 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Moq;
-using Moq.Protected;
 using Xunit;
 using Yoti.Auth.Sandbox.Profile;
 using Yoti.Auth.Sandbox.Profile.Request;
 using Yoti.Auth.Tests.Common;
 
-namespace Yoti.Auth.Sandbox
+namespace Yoti.Auth.Sandbox.Tests.Profile
 {
-    public class YotiSandboxClientTests
+    public class DocScanSandboxClientTests
     {
         private const string _someAppId = "someAppId";
         private readonly SandboxClient _yotiSandboxClient;
         private readonly YotiTokenRequest _yotiTokenRequest;
         private static readonly Uri _someUri = new Uri("https://www.test.com");
 
-        public YotiSandboxClientTests()
+        public DocScanSandboxClientTests()
         {
             using (HttpClientHandler handler = new HttpClientHandler())
             {
@@ -106,7 +103,7 @@ namespace Yoti.Auth.Sandbox
             })
             {
                 SandboxClient yotiSandboxClient;
-                Mock<HttpMessageHandler> handlerMock = SetupMockMessageHandler(httpResponseMessage);
+                Mock<HttpMessageHandler> handlerMock = HttpMock.SetupMockMessageHandler(httpResponseMessage);
 
                 using var httpClient = new HttpClient(handlerMock.Object);
                 yotiSandboxClient = new SandboxClientBuilder(httpClient)
@@ -131,7 +128,7 @@ namespace Yoti.Auth.Sandbox
             })
             {
                 SandboxClient yotiSandboxClient;
-                Mock<HttpMessageHandler> handlerMock = SetupMockMessageHandler(httpResponseMessage);
+                Mock<HttpMessageHandler> handlerMock = HttpMock.SetupMockMessageHandler(httpResponseMessage);
 
                 using var httpClient = new HttpClient(handlerMock.Object);
                 yotiSandboxClient = new SandboxClientBuilder(httpClient)
@@ -147,21 +144,6 @@ namespace Yoti.Auth.Sandbox
 
                 Assert.Contains("Error when setting up sharing profile", exception.Message, StringComparison.Ordinal);
             };
-        }
-
-        private Mock<HttpMessageHandler> SetupMockMessageHandler(HttpResponseMessage httpResponseMessage)
-        {
-            var handlerMock = new Mock<HttpMessageHandler>();
-            handlerMock
-               .Protected()
-               .Setup<Task<HttpResponseMessage>>(
-                  "SendAsync",
-                  ItExpr.IsAny<HttpRequestMessage>(),
-                  ItExpr.IsAny<CancellationToken>()
-               )
-               .ReturnsAsync(httpResponseMessage)
-               .Verifiable();
-            return handlerMock;
         }
     }
 }
