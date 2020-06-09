@@ -9,11 +9,11 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 {
     public class SandboxClient
     {
-        private const string _yotiDocScanSandboxPathPrefix = "sandbox/idverify/v1";
+        private const string _yotiDocScanSandboxPathPrefix = "/sandbox/idverify/v1";
         private readonly Uri _defaultDocScanSandboxApiUrl = new Uri(Constants.Api.DefaultYotiHost + _yotiDocScanSandboxPathPrefix);
 
         private readonly HttpClient _httpClient;
-        private readonly Uri _docScanSandboxApiUrl;
+        internal Uri DocScanSandboxApiUrl { get; private set; }
         private readonly string _sdkId;
         private readonly AsymmetricCipherKeyPair _keyPair;
 
@@ -25,7 +25,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
         internal SandboxClient(string sdkId, AsymmetricCipherKeyPair keyPair, Uri apiUri = null, HttpClient httpClient = null)
         {
             _httpClient = httpClient ?? new HttpClient();
-            _docScanSandboxApiUrl = apiUri ?? _defaultDocScanSandboxApiUrl;
+            DocScanSandboxApiUrl = apiUri ?? _defaultDocScanSandboxApiUrl;
             _sdkId = sdkId;
             _keyPair = keyPair;
         }
@@ -44,7 +44,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 
                 Yoti.Auth.Web.Request request = new RequestBuilder()
                     .WithKeyPair(_keyPair)
-                    .WithBaseUri(_docScanSandboxApiUrl)
+                    .WithBaseUri(DocScanSandboxApiUrl)
                     .WithEndpoint($"/sessions/{sessionId}/response-config")
                     .WithHttpMethod(HttpMethod.Put)
                     .WithContent(body)
@@ -78,7 +78,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 
                 Yoti.Auth.Web.Request request = new RequestBuilder()
                     .WithKeyPair(_keyPair)
-                    .WithBaseUri(_docScanSandboxApiUrl)
+                    .WithBaseUri(DocScanSandboxApiUrl)
                     .WithEndpoint($"/apps/{_sdkId}/response-config")
                     .WithHttpMethod(HttpMethod.Put)
                     .WithContent(body)

@@ -13,7 +13,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
 {
     public class DocScanSandboxClientTests
     {
-        private const string _someAppId = "someAppId";
+        private const string _someSdkId = "someAppId";
         private readonly SandboxClient _yotiSandboxClient;
         private readonly YotiTokenRequest _yotiTokenRequest;
         private static readonly Uri _someUri = new Uri("https://www.test.com");
@@ -28,7 +28,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
                 using var httpClient = new HttpClient(handler);
                 _yotiSandboxClient = new SandboxClientBuilder(httpClient)
                     .WithApiUri(_someUri)
-                    .WithClientSdkId(_someAppId)
+                    .WithClientSdkId(_someSdkId)
                     .WithKeyPair(KeyPair.Get())
                     .Build();
             }
@@ -57,7 +57,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
             {
                 SandboxClient.Builder()
                 .WithApiUri(_someUri)
-                .WithClientSdkId(_someAppId)
+                .WithClientSdkId(_someSdkId)
                 .Build();
             });
 
@@ -68,7 +68,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
         public static void BuilderShouldCreateClient()
         {
             var sandboxClient = SandboxClient.Builder()
-                .WithClientSdkId(_someAppId)
+                .WithClientSdkId(_someSdkId)
                 .WithKeyPair(KeyPair.Get())
                 .WithApiUri(_someUri)
                 .Build();
@@ -107,7 +107,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
 
                 using var httpClient = new HttpClient(handlerMock.Object);
                 yotiSandboxClient = new SandboxClientBuilder(httpClient)
-                    .WithClientSdkId(_someAppId)
+                    .WithClientSdkId(_someSdkId)
                     .WithKeyPair(KeyPair.Get())
                     .Build();
 
@@ -132,7 +132,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
 
                 using var httpClient = new HttpClient(handlerMock.Object);
                 yotiSandboxClient = new SandboxClientBuilder(httpClient)
-                    .WithClientSdkId(_someAppId)
+                    .WithClientSdkId(_someSdkId)
                     .WithKeyPair(KeyPair.Get())
                     .Build();
 
@@ -144,6 +144,29 @@ namespace Yoti.Auth.Sandbox.Tests.Profile
 
                 Assert.Contains("Error when setting up sharing profile", exception.Message, StringComparison.Ordinal);
             };
+        }
+
+        [Fact]
+        public static void BuilderShouldUseGivenApiUri()
+        {
+            var sandboxClient = SandboxClient.Builder()
+                .WithClientSdkId(_someSdkId)
+                .WithKeyPair(KeyPair.Get())
+                .WithApiUri(_someUri)
+                .Build();
+
+            Assert.Equal(_someUri, sandboxClient.SandboxApiUri);
+        }
+
+        [Fact]
+        public static void BuilderShouldUseDefaultApiUri()
+        {
+            var sandboxClient = SandboxClient.Builder()
+                .WithClientSdkId(_someSdkId)
+                .WithKeyPair(KeyPair.Get())
+                .Build();
+
+            Assert.Equal(new Uri("https://api.yoti.com/sandbox/v1"), sandboxClient.SandboxApiUri);
         }
     }
 }
