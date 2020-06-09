@@ -49,5 +49,28 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
 
             Assert.NotNull(sandboxClient);
         }
+
+        [Fact]
+        public static void BuilderShouldUseGivenApiUri()
+        {
+            var sandboxClient = SandboxClient.Builder()
+                .WithClientSdkId(_someSdkId)
+                .WithKeyPair(KeyPair.Get())
+                .WithApiUri(_someUri)
+                .Build();
+
+            Assert.Equal(_someUri, sandboxClient.DocScanSandboxApiUrl);
+        }
+
+        [Fact]
+        public static void BuilderShouldUseDefaultApiUri()
+        {
+            var sandboxClient = SandboxClient.Builder()
+                .WithClientSdkId(_someSdkId)
+                .WithKeyPair(KeyPair.Get())
+                .Build();
+
+            Assert.Equal(new Uri("https://api.yoti.com/sandbox/idverify/v1"), sandboxClient.DocScanSandboxApiUrl);
+        }
     }
 }
