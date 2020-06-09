@@ -11,7 +11,6 @@ namespace Yoti.Auth.Sandbox.Examples
     [TestClass]
     public class DocScanSandboxExample
     {
-        [TestMethod]
         public void TestDocScan()
         {
             Org.BouncyCastle.Crypto.AsymmetricCipherKeyPair sandboxKeyPair;
