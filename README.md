@@ -1,6 +1,11 @@
 # Yoti .NET Sandbox SDK
 
 [![Build Status](https://dev.azure.com/yoti/Dotnet%20SDK%20Sandbox/_apis/build/status/getyoti.yoti-dotnet-sdk-sandbox?branchName=master)](https://dev.azure.com/yoti/Dotnet%20SDK%20Sandbox/_build/latest?definitionId=9&branchName=master)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Adotnet-sandbox&metric=coverage)](https://sonarcloud.io/dashboard?id=getyoti%3Adotnet-sandbox)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Adotnet-sandbox&metric=bugs)](https://sonarcloud.io/dashboard?id=getyoti%3Adotnet-sandbox)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Adotnet-sandbox&metric=code_smells)](https://sonarcloud.io/dashboard?id=getyoti%3Adotnet-sandbox)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Adotnet-sandbox&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=getyoti%3Adotnet-sandbox)
+
 
 Welcome to the Yoti .NET Sandbox. This repo contains the tools you need to test your .NET back-end integration, alongside installation of the [Yoti .NET SDK](https://github.com/getyoti/yoti-dotnet-sdk).
 
