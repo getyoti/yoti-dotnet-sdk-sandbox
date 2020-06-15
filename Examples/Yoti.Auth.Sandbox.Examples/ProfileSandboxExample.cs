@@ -11,10 +11,8 @@ using Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty;
 
 namespace Yoti.Auth.Sandbox.Examples
 {
-    [TestClass]
     public class ProfileSandboxExample
     {
-        [TestMethod]
         public void TestProfile()
         {
             Org.BouncyCastle.Crypto.AsymmetricCipherKeyPair sandboxKeyPair;

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Yoti.Auth.Sandbox.DocScan.Request;
 using Yoti.Auth.Sandbox.DocScan.Request.Check;
 using Yoti.Auth.Sandbox.DocScan.Request.Check.Report;
@@ -8,7 +7,6 @@ using Yoti.Auth.Sandbox.DocScan.Request.Task;
 
 namespace Yoti.Auth.Sandbox.Examples
 {
-    [TestClass]
     public class DocScanSandboxExample
     {
         public void TestDocScan()
