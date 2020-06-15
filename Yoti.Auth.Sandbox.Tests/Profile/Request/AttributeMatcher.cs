@@ -36,7 +36,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
                     $"Value='{expectedAttribute.Value}'," +
                     $"Derivation='{expectedAttribute.Derivation}', " +
                     $"Optional='{expectedAttribute.Optional}'," +
-                    $"Anchors='{expectedAttribute.Anchors.ToString()}', but it was not found");
+                    $"Anchors='{expectedAttribute.Anchors}', but it was not found");
         }
 
         public static void AssertContainsAttribute(ICollection<SandboxAttribute> attributes, string name, string value)
