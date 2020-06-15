@@ -6,17 +6,15 @@ using System.Linq;
 using Yoti.Auth.Constants;
 using Yoti.Auth.Sandbox.Profile.Request.Attribute;
 using Yoti.Auth.Sandbox.Profile.Request.Attribute.Derivation;
+using Yoti.Auth.Sandbox.Profile.Request.ExtraData;
 
 namespace Yoti.Auth.Sandbox.Profile.Request
 {
     public class YotiTokenRequestBuilder
     {
         private string _rememberMeId;
+        private SandboxExtraData _extraData;
         private readonly Dictionary<string, SandboxAttribute> _attributes = new Dictionary<string, SandboxAttribute>();
-
-        public YotiTokenRequestBuilder()
-        {
-        }
 
         public YotiTokenRequestBuilder WithRememberMeId(string value)
         {
@@ -227,9 +225,18 @@ namespace Yoti.Auth.Sandbox.Profile.Request
             return WithAttribute(sandboxAttribute);
         }
 
+        public YotiTokenRequestBuilder WithExtraData(SandboxExtraData extraData)
+        {
+            _extraData = extraData;
+            return this;
+        }
+
         public YotiTokenRequest Build()
         {
-            return new YotiTokenRequest(_rememberMeId, new ReadOnlyCollection<SandboxAttribute>(_attributes.Values.ToList()));
+            return new YotiTokenRequest(
+                _rememberMeId,
+                new ReadOnlyCollection<SandboxAttribute>(_attributes.Values.ToList()),
+                _extraData);
         }
 
         private static SandboxAttribute CreateAttribute(string name, string value)
