@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Yoti.Auth.Share.ThirdParty;
 
 namespace Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty
 {
     public class SandboxAttributeIssuanceDetailsBuilder
     {
-        private readonly List<AttributeDefinition> _definitions = new List<AttributeDefinition>();
+        private readonly List<SandboxDefinition> _definitions = new List<SandboxDefinition>();
         private string _issuanceToken;
         private DateTime? _expiryDate;
 
@@ -28,7 +27,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty
         {
             Validation.NotNullOrEmpty(attributeName, nameof(attributeName));
 
-            _definitions.Add(new AttributeDefinition(attributeName));
+            _definitions.Add(new SandboxDefinition(attributeName));
             return this;
         }
 
