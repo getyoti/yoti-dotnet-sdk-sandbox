@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty
 {
@@ -7,7 +8,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty
     {
         private readonly List<SandboxDefinition> _definitions = new List<SandboxDefinition>();
         private string _issuanceToken;
-        private DateTime? _expiryDate;
+        private string _expiryDate;
 
         public SandboxAttributeIssuanceDetailsBuilder WithIssuanceToken(string issuanceToken)
         {
@@ -19,7 +20,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty
 
         public SandboxAttributeIssuanceDetailsBuilder WithExpiryDate(DateTime expiryDate)
         {
-            _expiryDate = expiryDate;
+            _expiryDate = expiryDate.ToString(Constants.Format.RFC3339PatternMilli, DateTimeFormatInfo.InvariantInfo);
             return this;
         }
 
