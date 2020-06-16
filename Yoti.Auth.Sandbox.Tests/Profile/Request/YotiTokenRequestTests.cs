@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 using Yoti.Auth.Document;
 using Yoti.Auth.Sandbox.Profile.Request;
@@ -600,7 +602,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             SandboxAttributeIssuanceDetails sandboxAttributeIssuanceDetails =
                 new SandboxAttributeIssuanceDetailsBuilder()
                 .WithDefinition("attributeName")
-                .WithExpiryDate(new DateTime(2030, 12, 31, 12, 00, 00))
+                .WithExpiryDate(new DateTime(2030, 12, 31, 12, 23, 59, 999))
                 .WithIssuanceToken("issuanceToken")
                 .Build();
 
@@ -616,7 +618,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
 
             Assert.Equal("THIRD_PARTY_ATTRIBUTE", result.Type);
             Assert.Equal("attributeName", result.Value.IssuingAttributes.Definitions.Single().Name);
-            Assert.Equal(new DateTime(2030, 12, 31, 12, 00, 00), result.Value.IssuingAttributes.ExpiryDate);
+            Assert.Equal("2030-12-31T12:23:59.999Z", result.Value.IssuingAttributes.ExpiryDate);
             Assert.Equal("issuanceToken", result.Value.IssuanceToken);
         }
 
