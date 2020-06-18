@@ -6,7 +6,7 @@ namespace Yoti.Auth.Sandbox.Profile.Response
     {
         public string Token { private set; get; }
 
-        public YotiTokenResponse([JsonProperty(PropertyName = "token")]string token)
+        public YotiTokenResponse([JsonProperty(PropertyName = "token")] string token)
         {
             Token = token;
         }

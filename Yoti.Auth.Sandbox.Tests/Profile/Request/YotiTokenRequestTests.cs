@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 using Yoti.Auth.Document;
 using Yoti.Auth.Sandbox.Profile.Request;
 using Yoti.Auth.Sandbox.Profile.Request.Attribute;
 using Yoti.Auth.Sandbox.Profile.Request.Attribute.Derivation;
+using Yoti.Auth.Sandbox.Profile.Request.ExtraData;
+using Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty;
 
 namespace Yoti.Auth.Sandbox.Tests.Profile.Request
 {
@@ -589,6 +594,54 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
 
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.SelfieAttribute, _someBase64Selfie, anchors);
+        }
+
+        [Fact]
+        public static void ShouldCreateRequestWithExtraData()
+        {
+            SandboxAttributeIssuanceDetails sandboxAttributeIssuanceDetails =
+                new SandboxAttributeIssuanceDetailsBuilder()
+                .WithDefinition("attributeName")
+                .WithExpiryDate(new DateTime(2030, 12, 31, 12, 23, 59, 999))
+                .WithIssuanceToken("issuanceToken")
+                .Build();
+
+            var extraData = new SandboxExtraData(
+                new List<SandboxBaseDataEntry> { sandboxAttributeIssuanceDetails });
+
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithExtraData(extraData)
+                    .Build();
+
+            var baseResult = yotiTokenRequest.ExtraData.DataEntries.Single();
+            var result = baseResult as SandboxDataEntry<SandboxAttributeIssuanceDetailsValue>;
+
+            Assert.Equal("THIRD_PARTY_ATTRIBUTE", result.Type);
+            Assert.Equal("attributeName", result.Value.IssuingAttributes.Definitions.Single().Name);
+            Assert.Equal("2030-12-31T12:23:59.999Z", result.Value.IssuingAttributes.ExpiryDate);
+            Assert.Equal("issuanceToken", result.Value.IssuanceToken);
+        }
+
+        [Fact]
+        public static void ShouldHaveNullExpiryDateIfNotSpecified()
+        {
+            SandboxAttributeIssuanceDetails sandboxAttributeIssuanceDetails =
+                new SandboxAttributeIssuanceDetailsBuilder()
+                .WithDefinition("attributeName")
+                .WithIssuanceToken("issuanceToken")
+                .Build();
+
+            var extraData = new SandboxExtraData(
+                new List<SandboxBaseDataEntry> { sandboxAttributeIssuanceDetails });
+
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithExtraData(extraData)
+                    .Build();
+
+            var baseResult = yotiTokenRequest.ExtraData.DataEntries.Single();
+            var result = baseResult as SandboxDataEntry<SandboxAttributeIssuanceDetailsValue>;
+
+            Assert.Null(result.Value.IssuingAttributes.ExpiryDate);
         }
     }
 }

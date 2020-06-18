@@ -6,10 +6,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Yoti.Auth.Sandbox.Profile;
 using Yoti.Auth.Sandbox.Profile.Request;
 using Yoti.Auth.Sandbox.Profile.Request.Attribute.Derivation;
+using Yoti.Auth.Sandbox.Profile.Request.ExtraData;
+using Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty;
 
 namespace Yoti.Auth.Sandbox.Examples
 {
-    [TestClass]
     public class ProfileSandboxExample
     {
         public void TestProfile()
@@ -33,6 +34,18 @@ namespace Yoti.Auth.Sandbox.Examples
                 .WithAgeOver(18)
                 .Build();
 
+            DateTime expiryDate = DateTime.UtcNow.AddDays(1);
+
+            SandboxExtraData sandboxExtraData =
+                new SandboxExtraDataBuilder()
+                .WithDataEntry(
+                    new SandboxAttributeIssuanceDetailsBuilder()
+                    .WithDefinition("attribute.name")
+                    .WithExpiryDate(expiryDate)
+                    .WithIssuanceToken("some-issuance-token")
+                    .Build())
+                .Build();
+
             YotiTokenRequest tokenRequest = new YotiTokenRequestBuilder()
                 .WithRememberMeId("some Remember Me ID")
                 .WithGivenNames("some given names")
@@ -51,6 +64,7 @@ namespace Yoti.Auth.Sandbox.Examples
                 .WithBase64Selfie(Convert.ToBase64String(Encoding.UTF8.GetBytes("some base64 encoded selfie")))
                 .WithEmailAddress("some@email")
                 .WithDocumentDetails("PASSPORT USA 1234abc")
+                .WithExtraData(sandboxExtraData)
                 .Build();
 
             var sandboxOneTimeUseToken = sandboxClient.SetupSharingProfile(tokenRequest);
