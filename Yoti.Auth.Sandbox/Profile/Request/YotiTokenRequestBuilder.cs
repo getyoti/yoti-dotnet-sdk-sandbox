@@ -225,6 +225,19 @@ namespace Yoti.Auth.Sandbox.Profile.Request
             return WithAttribute(sandboxAttribute);
         }
 
+        public YotiTokenRequestBuilder WithDocumentImages(SandboxDocumentImages documentImages)
+        {
+            return WithDocumentImages(documentImages, new List<SandboxAnchor>());
+        }
+
+        public YotiTokenRequestBuilder WithDocumentImages(SandboxDocumentImages documentImages, List<SandboxAnchor> anchors)
+        {
+            Validation.NotNull(documentImages, nameof(documentImages));
+
+            SandboxAttribute sandboxAttribute = CreateAttribute(UserProfile.DocumentImagesAttribute, documentImages.GetValues(), anchors);
+            return WithAttribute(sandboxAttribute);
+        }
+
         public YotiTokenRequestBuilder WithExtraData(SandboxExtraData extraData)
         {
             _extraData = extraData;

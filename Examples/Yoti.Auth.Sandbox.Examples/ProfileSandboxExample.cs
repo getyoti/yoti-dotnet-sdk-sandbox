@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Yoti.Auth.Sandbox.Profile;
 using Yoti.Auth.Sandbox.Profile.Request;
+using Yoti.Auth.Sandbox.Profile.Request.Attribute;
 using Yoti.Auth.Sandbox.Profile.Request.Attribute.Derivation;
 using Yoti.Auth.Sandbox.Profile.Request.ExtraData;
 using Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty;
@@ -36,6 +37,11 @@ namespace Yoti.Auth.Sandbox.Examples
 
             DateTime expiryDate = DateTime.UtcNow.AddDays(1);
 
+            var documentImages = new SandboxDocumentImagesBuilder()
+                .WithJpegContent(Encoding.UTF8.GetBytes("some Base64 encoded JPEG"))
+                .WithPngContent(Encoding.UTF8.GetBytes("some Base64 encoded PNG"))
+                .Build();
+
             SandboxExtraData sandboxExtraData =
                 new SandboxExtraDataBuilder()
                 .WithDataEntry(
@@ -64,6 +70,7 @@ namespace Yoti.Auth.Sandbox.Examples
                 .WithBase64Selfie(Convert.ToBase64String(Encoding.UTF8.GetBytes("some base64 encoded selfie")))
                 .WithEmailAddress("some@email")
                 .WithDocumentDetails("PASSPORT USA 1234abc")
+                .WithDocumentImages(documentImages)
                 .WithExtraData(sandboxExtraData)
                 .Build();
 
