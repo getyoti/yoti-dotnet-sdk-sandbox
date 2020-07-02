@@ -16,6 +16,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
 {
     public static class YotiTokenRequestTests
     {
+        private const string _someRememberMeId = "someRememberMeId";
         private const string _someAttributeName = "someAttributeName";
         private const string _someFamilyName = "someFamilyName";
         private const string _someGivenNames = "given names";
@@ -31,11 +32,29 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
         private const string _someBase64Selfie = "someBase64Selfie";
         private const string _someDocumentDetails = "someDocumentDetails";
 
+        private static readonly byte[] _someImageContent = Encoding.UTF8.GetBytes("image");
+        private static readonly string base64Content = Convert.ToBase64String(_someImageContent);
+        private const string _mimeTypeJpeg = "image/jpeg";
+        private const string _mimeTypePng = "image/png";
+        private static readonly string expectedJpegBase64DataUrl = $"data:{_mimeTypeJpeg};base64,{base64Content}";
+        private static readonly string expectedPngBase64DataUrl = $"data:{_mimeTypePng};base64,{base64Content}";
+        private static readonly string _expectedDocumentImagesAttributeValue = $"{expectedJpegBase64DataUrl}&{expectedPngBase64DataUrl}";
+
         private static readonly List<SandboxAnchor> anchors = new List<SandboxAnchor> { SandboxAnchor.Builder().Build() };
 
         private static readonly SandboxAttribute SOME_ATTRIBUTE = SandboxAttribute.Builder()
                .WithName(_someAttributeName)
                .Build();
+
+        [Fact]
+        public static void ShouldCreateRequestWithRememberMeId()
+        {
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithRememberMeId(_someRememberMeId)
+                    .Build();
+
+            Assert.Equal(_someRememberMeId, yotiTokenRequest.RememberMeId);
+        }
 
         [Fact]
         public static void ShouldAddAttributes()
@@ -531,6 +550,49 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
 
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsOptionalAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails, anchors);
+        }
+
+        [Fact]
+        public static void ShouldCreateRequestWithDocumentImages()
+        {
+            SandboxDocumentImages documentImages = new SandboxDocumentImagesBuilder()
+                    .WithJpegContent(_someImageContent)
+                    .WithPngContent(_someImageContent)
+                    .Build();
+
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithDocumentImages(documentImages)
+                    .Build();
+
+            ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
+
+            Assert.True(result.Count == 1);
+            AttributeMatcher.AssertContainsAttribute(
+                result,
+                Constants.UserProfile.DocumentImagesAttribute,
+                _expectedDocumentImagesAttributeValue);
+        }
+
+        [Fact]
+        public static void ShouldCreateRequestWithDocumentImagesAndAnchors()
+        {
+            SandboxDocumentImages documentImages = new SandboxDocumentImagesBuilder()
+                      .WithJpegContent(_someImageContent)
+                      .WithPngContent(_someImageContent)
+                      .Build();
+
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithDocumentImages(documentImages, anchors)
+                    .Build();
+
+            ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
+
+            Assert.True(result.Count == 1);
+            AttributeMatcher.AssertContainsAttribute(
+                result,
+                Constants.UserProfile.DocumentImagesAttribute,
+                _expectedDocumentImagesAttributeValue,
+                anchors);
         }
 
         [Fact]
