@@ -38,8 +38,8 @@ namespace Yoti.Auth.Sandbox.Examples
             DateTime expiryDate = DateTime.UtcNow.AddDays(1);
 
             var documentImages = new SandboxDocumentImagesBuilder()
-                .WithJpegContent(Encoding.UTF8.GetBytes("some Base64 encoded JPEG"))
-                .WithPngContent(Encoding.UTF8.GetBytes("some Base64 encoded PNG"))
+                .WithJpegContent(Encoding.UTF8.GetBytes("some JPEG content"))
+                .WithPngContent(Encoding.UTF8.GetBytes("some PNG content"))
                 .Build();
 
             SandboxExtraData sandboxExtraData =
