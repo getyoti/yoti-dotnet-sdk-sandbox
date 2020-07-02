@@ -234,7 +234,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request
         {
             Validation.NotNull(documentImages, nameof(documentImages));
 
-            SandboxAttribute sandboxAttribute = CreateAttribute(UserProfile.DocumentImagesAttribute, documentImages.GetValues(), anchors);
+            SandboxAttribute sandboxAttribute = CreateAttribute(UserProfile.DocumentImagesAttribute, documentImages.GetValue(), anchors);
             return WithAttribute(sandboxAttribute);
         }
 

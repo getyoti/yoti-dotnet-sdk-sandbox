@@ -23,7 +23,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute
                 .Build();
 
             Assert.Equal(_someContent, documentImages.Images.Single().GetContent());
-            Assert.Equal(expectedJpegBase64DataUrl, documentImages.GetValues());
+            Assert.Equal(expectedJpegBase64DataUrl, documentImages.GetValue());
             Assert.Equal(_mimeTypeJpeg, documentImages.Images.Single().GetMIMEType());
         }
 
@@ -35,7 +35,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute
                .Build();
 
             Assert.Equal(_someContent, documentImages.Images[0].GetContent());
-            Assert.Equal(expectedPngBase64DataUrl, documentImages.GetValues());
+            Assert.Equal(expectedPngBase64DataUrl, documentImages.GetValue());
             Assert.Equal(_mimeTypePng, documentImages.Images.Single().GetMIMEType());
         }
 
@@ -51,7 +51,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute
             Assert.Equal(3, documentImages.Images.Count);
             Assert.Equal(
                 $"{expectedPngBase64DataUrl}&{expectedPngBase64DataUrl}&{expectedJpegBase64DataUrl}",
-                documentImages.GetValues());
+                documentImages.GetValue());
         }
     }
 }
