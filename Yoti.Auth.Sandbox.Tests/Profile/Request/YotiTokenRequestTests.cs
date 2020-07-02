@@ -596,6 +596,49 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
         }
 
         [Fact]
+        public static void ShouldCreateRequestWithDocumentImages()
+        {
+            SandboxDocumentImages documentImages = new SandboxDocumentImagesBuilder()
+                    .WithJpegContent(_someImageContent)
+                    .WithPngContent(_someImageContent)
+                    .Build();
+
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithDocumentImages(documentImages)
+                    .Build();
+
+            ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
+
+            Assert.True(result.Count == 1);
+            AttributeMatcher.AssertContainsAttribute(
+                result,
+                Constants.UserProfile.DocumentImagesAttribute,
+                _expectedDocumentImagesAttributeValue);
+        }
+
+        [Fact]
+        public static void ShouldCreateRequestWithDocumentImagesAndAnchors()
+        {
+            SandboxDocumentImages documentImages = new SandboxDocumentImagesBuilder()
+                      .WithJpegContent(_someImageContent)
+                      .WithPngContent(_someImageContent)
+                      .Build();
+
+            YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
+                    .WithDocumentImages(documentImages, anchors)
+                    .Build();
+
+            ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
+
+            Assert.True(result.Count == 1);
+            AttributeMatcher.AssertContainsAttribute(
+                result,
+                Constants.UserProfile.DocumentImagesAttribute,
+                _expectedDocumentImagesAttributeValue,
+                anchors);
+        }
+
+        [Fact]
         public static void ShouldCreateRequestWithSelfieBytes()
         {
             YotiTokenRequest yotiTokenRequest = YotiTokenRequest.Builder()
