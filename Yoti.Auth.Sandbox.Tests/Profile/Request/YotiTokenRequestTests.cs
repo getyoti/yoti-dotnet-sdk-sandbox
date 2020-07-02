@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 using Yoti.Auth.Document;
 using Yoti.Auth.Sandbox.Profile.Request;
