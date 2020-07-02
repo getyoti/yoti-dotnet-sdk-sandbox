@@ -13,7 +13,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
 
         public List<Image> Images { get; private set; }
 
-        public string GetValues()
+        internal string GetValue()
         {
             return string.Join("&", Images.Select(x => x.GetBase64URI()));
         }
