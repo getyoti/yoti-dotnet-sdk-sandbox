@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
@@ -27,6 +28,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
         [JsonProperty(PropertyName = "derivation")]
         public string Derivation { get; }
 
+        [Obsolete("Deprecated, will be removed in v2.0.0")]
         [JsonProperty(PropertyName = "optional")]
         public string Optional { get; }
 
