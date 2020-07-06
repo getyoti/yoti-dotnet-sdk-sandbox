@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
 {
@@ -28,6 +29,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
             return this;
         }
 
+        [Obsolete("Deprecated, will be removed in v2.0.0")]
         public SandboxAttributeBuilder WithOptional(bool optional)
         {
             _optional = optional;
