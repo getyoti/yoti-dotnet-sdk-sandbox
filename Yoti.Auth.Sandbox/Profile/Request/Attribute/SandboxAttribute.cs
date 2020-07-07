@@ -15,7 +15,9 @@ namespace Yoti.Auth.Sandbox.Profile.Request.Attribute
             Name = name;
             Value = value;
             Derivation = derivation;
+#pragma warning disable 0618
             Optional = optional.ToString();
+#pragma warning restore 0618
             Anchors = anchors ?? new List<SandboxAnchor>();
         }
 

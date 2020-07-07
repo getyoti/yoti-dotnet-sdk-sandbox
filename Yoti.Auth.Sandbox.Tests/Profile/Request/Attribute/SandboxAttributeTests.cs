@@ -21,23 +21,30 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute
             Assert.Equal(_someName, result.Name);
             Assert.Equal(_someDerivation, result.Derivation);
             Assert.Equal(_someValue, result.Value);
-            Assert.Equal("False", result.Optional);
+#pragma warning disable 0618
+            Assert.Equal("False", result.Optional); //NOSONAR
+#pragma warning restore 0618
         }
 
         [Fact]
         public static void ShouldBeOptionalWhenSpecified()
         {
+#pragma warning disable 0618
             SandboxAttribute result = SandboxAttribute.Builder()
                     .WithName(_someName)
                     .WithDerivation(_someDerivation)
                     .WithValue(_someValue)
-                    .WithOptional(true)
+                    .WithOptional(true) //NOSONAR
+#pragma warning restore 0618
+
                     .Build();
 
             Assert.Equal(_someName, result.Name);
             Assert.Equal(_someDerivation, result.Derivation);
             Assert.Equal(_someValue, result.Value);
-            Assert.Equal("True", result.Optional);
+#pragma warning disable 0618
+            Assert.Equal("True", result.Optional); //NOSONAR
+#pragma warning restore 0618
         }
     }
 }
