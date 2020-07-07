@@ -219,7 +219,6 @@ namespace Yoti.Auth.Sandbox.Profile.Request
             SandboxAttribute sandboxAttribute = SandboxAttribute.Builder()
                     .WithName(UserProfile.DocumentDetailsAttribute)
                     .WithValue(value)
-                    .WithOptional(true)
                     .WithAnchors(anchors)
                     .Build();
             return WithAttribute(sandboxAttribute);

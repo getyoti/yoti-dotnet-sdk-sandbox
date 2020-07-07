@@ -10,11 +10,13 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
     {
         public static void AssertContainsAttribute(ICollection<SandboxAttribute> attributes, string name, string value, bool optional, string derivation = null, List<SandboxAnchor> anchors = null)
         {
+#pragma warning disable 0618
             var expectedAttribute = new SandboxAttributeBuilder()
                 .WithName(name)
                 .WithValue(value)
                 .WithDerivation(derivation)
-                .WithOptional(optional)
+                .WithOptional(optional) //NOSONAR
+#pragma warning restore 0618
                 .WithAnchors(anchors)
                 .Build();
 
@@ -23,7 +25,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
                 if (expectedAttribute.Name == attribute.Name
                 && expectedAttribute.Value == attribute.Value
                 && expectedAttribute.Derivation == attribute.Derivation
-                && expectedAttribute.Optional == attribute.Optional
+#pragma warning disable 0618
+                && expectedAttribute.Optional == attribute.Optional //NOSONAR
+#pragma warning restore 0618
                 && expectedAttribute.Anchors.SequenceEqual(attribute.Anchors))
                 {
                     return;
@@ -35,7 +39,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
                     $"Name='{expectedAttribute.Name}'," +
                     $"Value='{expectedAttribute.Value}'," +
                     $"Derivation='{expectedAttribute.Derivation}', " +
-                    $"Optional='{expectedAttribute.Optional}'," +
+#pragma warning disable 0618
+                    $"Optional='{expectedAttribute.Optional}'," + //NOSONAR
+#pragma warning restore 0618
                     $"Anchors='{expectedAttribute.Anchors}', but it was not found");
         }
 

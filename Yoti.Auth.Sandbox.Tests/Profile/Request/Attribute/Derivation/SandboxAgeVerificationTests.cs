@@ -87,7 +87,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute.Derivation
             Assert.Equal(Constants.UserProfile.DateOfBirthAttribute, result.Name);
             Assert.Equal(_validDateString, result.Value);
             Assert.Equal($"{Constants.UserProfile.AgeOverAttribute}:{21}", result.Derivation);
-            Assert.Equal("False", result.Optional);
+#pragma warning disable 0618
+            Assert.Equal("False", result.Optional); //NOSONAR
+#pragma warning restore 0618
             Assert.Empty(result.Anchors);
         }
 
@@ -103,7 +105,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute.Derivation
             Assert.Equal(Constants.UserProfile.DateOfBirthAttribute, result.Name);
             Assert.Equal(_validDateString, result.Value);
             Assert.Equal($"{Constants.UserProfile.AgeUnderAttribute}:{16}", result.Derivation);
-            Assert.Equal("False", result.Optional);
+#pragma warning disable 0618
+            Assert.Equal("False", result.Optional); //NOSONAR
+#pragma warning restore 0618
             Assert.Empty(result.Anchors);
         }
 
@@ -121,7 +125,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute.Derivation
             Assert.Equal(Constants.UserProfile.DateOfBirthAttribute, result.Name);
             Assert.Equal(_validDateString, result.Value);
             Assert.Equal($"{Constants.UserProfile.AgeUnderAttribute}:{16}", result.Derivation);
-            Assert.Equal("False", result.Optional);
+#pragma warning disable 0618
+            Assert.Equal("False", result.Optional); //NOSONAR
+#pragma warning restore 0618
             Assert.Equal(new System.Collections.Generic.List<SandboxAnchor> { sandboxAnchor }, result.Anchors);
         }
     }
