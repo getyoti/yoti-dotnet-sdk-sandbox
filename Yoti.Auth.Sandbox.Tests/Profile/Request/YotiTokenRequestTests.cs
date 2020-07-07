@@ -501,7 +501,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsOptionalAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, "type country number");
+            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, "type country number");
         }
 
         [Fact]
@@ -519,7 +519,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsOptionalAttribute(
+            AttributeMatcher.AssertContainsAttribute(
                 result,
                 Constants.UserProfile.DocumentDetailsAttribute,
                 "type country number",
@@ -536,7 +536,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsOptionalAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails);
+            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails);
         }
 
         [Fact]
@@ -549,7 +549,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsOptionalAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails, anchors);
         }
 
         [Fact]
