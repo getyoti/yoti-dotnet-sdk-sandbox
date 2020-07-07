@@ -216,12 +216,9 @@ namespace Yoti.Auth.Sandbox.Profile.Request
 
         public YotiTokenRequestBuilder WithDocumentDetails(string value, List<SandboxAnchor> anchors)
         {
-#pragma warning disable 0618
             SandboxAttribute sandboxAttribute = SandboxAttribute.Builder()
                     .WithName(UserProfile.DocumentDetailsAttribute)
                     .WithValue(value)
-                    .WithOptional(true) //NOSONAR
-#pragma warning restore 0618
                     .WithAnchors(anchors)
                     .Build();
             return WithAttribute(sandboxAttribute);
