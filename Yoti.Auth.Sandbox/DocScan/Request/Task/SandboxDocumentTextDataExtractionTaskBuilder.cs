@@ -4,11 +4,14 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
 {
     public class SandboxDocumentTextDataExtractionTaskBuilder : SandboxTaskResult
     {
-        private Dictionary<string, object> _documentFields = new Dictionary<string, object>();
+        private Dictionary<string, object> _documentFields;
         private SandboxDocumentFilter _documentFilter;
 
         public SandboxDocumentTextDataExtractionTaskBuilder WithDocumentField(string key, object value)
         {
+            if (_documentFields == null) {
+                _documentFields = new Dictionary<string, object>();
+            }
             _documentFields.Add(key, value);
             return this;
         }
