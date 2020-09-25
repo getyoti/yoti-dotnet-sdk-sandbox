@@ -9,7 +9,8 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
 
         public SandboxDocumentTextDataExtractionTaskBuilder WithDocumentField(string key, object value)
         {
-            if (_documentFields == null) {
+            if (_documentFields == null)
+            {
                 _documentFields = new Dictionary<string, object>();
             }
             _documentFields.Add(key, value);
