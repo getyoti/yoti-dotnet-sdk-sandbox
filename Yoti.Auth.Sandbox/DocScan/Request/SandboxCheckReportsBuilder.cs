@@ -9,6 +9,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
         private readonly List<SandboxDocumentAuthenticityCheck> _documentAuthenticityChecks;
         private readonly List<SandboxLivenessCheck> _livenessChecks;
         private readonly List<SandboxDocumentFaceMatchCheck> _documentFaceMatchChecks;
+        private readonly List<SandboxIdDocumentComparisonCheck> _idDocumentComparisonChecks;
         private int? _asyncReportDelay;
 
         public SandboxCheckReportsBuilder()
@@ -18,6 +19,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             _documentAuthenticityChecks = new List<SandboxDocumentAuthenticityCheck>();
             _livenessChecks = new List<SandboxLivenessCheck>();
             _documentFaceMatchChecks = new List<SandboxDocumentFaceMatchCheck>();
+            _idDocumentComparisonChecks = new List<SandboxIdDocumentComparisonCheck>();
         }
 
         public SandboxCheckReportsBuilder WithDocumentTextDataCheck(SandboxDocumentTextDataCheck textDataCheckReport)
@@ -44,6 +46,12 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             return this;
         }
 
+        public SandboxCheckReportsBuilder WithIdDocumentComparisonCheck(SandboxIdDocumentComparisonCheck sandboxIDDocumentComparisonCheck)
+        {
+            _idDocumentComparisonChecks.Add(sandboxIDDocumentComparisonCheck);
+            return this;
+        }
+
         public SandboxCheckReportsBuilder WithAsyncReportDelay(int asyncReportDelay)
         {
             _asyncReportDelay = asyncReportDelay;
@@ -52,7 +60,13 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 
         public SandboxCheckReports Build()
         {
-            return new SandboxCheckReports(_textDataChecks, _documentAuthenticityChecks, _livenessChecks, _documentFaceMatchChecks, _asyncReportDelay);
+            return new SandboxCheckReports(
+                _textDataChecks,
+                _documentAuthenticityChecks,
+                _livenessChecks,
+                _documentFaceMatchChecks,
+                _asyncReportDelay,
+                _idDocumentComparisonChecks);
         }
     }
 }
