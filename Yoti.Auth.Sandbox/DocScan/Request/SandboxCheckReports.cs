@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Yoti.Auth.Constants;
 using Yoti.Auth.Sandbox.DocScan.Request.Check;
 
 namespace Yoti.Auth.Sandbox.DocScan.Request
@@ -21,16 +20,16 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             AsyncReportDelay = asyncReportDelay;
         }
 
-        [JsonProperty(PropertyName = DocScanConstants.IdDocumentTextDataCheck)]
+        [JsonProperty(PropertyName = "ID_DOCUMENT_TEXT_DATA_CHECK")]
         public List<SandboxDocumentTextDataCheck> TextDataCheck { get; }
 
-        [JsonProperty(PropertyName = DocScanConstants.IdDocumentAuthenticity)]
+        [JsonProperty(PropertyName = "ID_DOCUMENT_AUTHENTICITY")]
         public List<SandboxDocumentAuthenticityCheck> DocumentAuthenticityCheck { get; }
 
-        [JsonProperty(PropertyName = DocScanConstants.Liveness)]
+        [JsonProperty(PropertyName = "LIVENESS")]
         public List<SandboxLivenessCheck> LivenessChecks { get; }
 
-        [JsonProperty(PropertyName = DocScanConstants.IdDocumentFaceMatch)]
+        [JsonProperty(PropertyName = "ID_DOCUMENT_FACE_MATCH")]
         public List<SandboxDocumentFaceMatchCheck> DocumentFaceMatchCheck { get; }
 
         [JsonProperty(PropertyName = "async_report_delay")]
