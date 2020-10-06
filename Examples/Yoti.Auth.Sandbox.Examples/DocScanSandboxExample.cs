@@ -22,7 +22,7 @@ namespace Yoti.Auth.Sandbox.Examples
 
             var responseConfig = new ResponseConfigBuilder()
                 .WithCheckReports(
-                    (new SandboxCheckReportsBuilder())
+                    new SandboxCheckReportsBuilder()
                         .WithAsyncReportDelay(10)
                         .WithDocumentAuthenticityCheck(
                             new SandboxDocumentAuthenticityCheckBuilder()
@@ -62,7 +62,6 @@ namespace Yoti.Auth.Sandbox.Examples
                                 .WithDocumentFields(
                                 new Dictionary<string, object>
                                 {
-                                    { "full_name", "John Doe" },
                                     { "full_name", "John Doe"},
                                     { "nationality", "GBR"},
                                     { "date_of_birth", "1986-06-01"},
@@ -75,22 +74,22 @@ namespace Yoti.Auth.Sandbox.Examples
                                         .Build()
                                 )
                                 .WithRecommendation(
-                                    (new SandboxRecommendationBuilder())
+                                    new SandboxRecommendationBuilder()
                                         .WithValue("APPROVE")
                                         .Build()
                                 )
                                 .Build()
                         )
                         .WithLivenessCheck(
-                            (new SandboxZoomLivenessCheckBuilder())
+                            new SandboxZoomLivenessCheckBuilder()
                                 .WithBreakdown(
-                                    (new SandboxBreakdownBuilder())
+                                    new SandboxBreakdownBuilder()
                                         .WithSubCheck("security_features")
                                         .WithResult("PASS")
                                         .Build()
                                 )
                                 .WithRecommendation(
-                                    (new SandboxRecommendationBuilder())
+                                    new SandboxRecommendationBuilder()
                                         .WithValue("APPROVE")
                                         .Build()
                                 )
@@ -99,13 +98,12 @@ namespace Yoti.Auth.Sandbox.Examples
                         .Build()
     )
     .WithTaskResults(
-        (new SandboxTaskResultsBuilder())
+        new SandboxTaskResultsBuilder()
             .WithDocumentTextDataExtractionTask(
                 new SandboxDocumentTextDataExtractionTaskBuilder()
                     .WithDocumentFields(
                         new Dictionary<string, object>
                         {
-                            { "full_name", "John Doe" },
                             { "full_name", "John Doe"},
                             { "nationality", "GBR"},
                             { "date_of_birth", "1986-06-01"},
