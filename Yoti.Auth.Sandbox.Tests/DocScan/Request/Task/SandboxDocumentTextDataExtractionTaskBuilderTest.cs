@@ -1,6 +1,8 @@
 using Xunit;
 using System.Collections.Generic;
 using Yoti.Auth.Sandbox.DocScan.Request.Task;
+using System;
+using System.Text;
 
 namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
 {
@@ -51,11 +53,26 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
         }
 
         [Fact]
-        public void ShouldBuildWithoutDocumentFields()
+        public void ShouldBuildWithoutMethods()
         {
             var task = new SandboxDocumentTextDataExtractionTaskBuilder().Build();
 
             Assert.Null(task.Result.DocumentFields);
+            Assert.Null(task.Result.DocumentIdPhoto);
+        }
+
+        [Fact]
+        public void ShouldBuildWithDocumentIdPhoto()
+        {
+            byte[] imageBytes = Encoding.UTF8.GetBytes("someImage");
+            string contentType = "image/jpeg";
+
+            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+                .WithDocumentIdPhoto(contentType, imageBytes)
+                .Build();
+
+            Assert.Equal(contentType, task.Result.DocumentIdPhoto.ContentType);
+            Assert.Equal(Convert.ToBase64String(imageBytes), task.Result.DocumentIdPhoto.Base64Data);
         }
     }
 }
