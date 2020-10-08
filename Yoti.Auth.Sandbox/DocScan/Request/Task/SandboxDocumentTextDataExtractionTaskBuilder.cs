@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Yoti.Auth.Sandbox.DocScan.Request.Task
 {
@@ -6,6 +7,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
     {
         private Dictionary<string, object> _documentFields;
         private SandboxDocumentFilter _documentFilter;
+        private SandboxDocumentIdPhoto _documentIdPhoto;
 
         public SandboxDocumentTextDataExtractionTaskBuilder WithDocumentField(string key, object value)
         {
@@ -29,9 +31,16 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
             return this;
         }
 
+        public SandboxDocumentTextDataExtractionTaskBuilder WithDocumentIdPhoto(string contentType, byte[] documentIdPhoto)
+        {
+            string base64DocumentIdPhoto = Convert.ToBase64String(documentIdPhoto);
+            _documentIdPhoto = new SandboxDocumentIdPhoto(contentType, base64DocumentIdPhoto);
+            return this;
+        }
+
         public SandboxDocumentTextDataExtractionTask Build()
         {
-            SandboxDocumentTextDataExtractionTaskResult result = new SandboxDocumentTextDataExtractionTaskResult(_documentFields);
+            SandboxDocumentTextDataExtractionTaskResult result = new SandboxDocumentTextDataExtractionTaskResult(_documentFields, _documentIdPhoto);
             return new SandboxDocumentTextDataExtractionTask(result, _documentFilter);
         }
     }

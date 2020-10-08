@@ -8,9 +8,15 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
         [JsonProperty(PropertyName = "document_fields")]
         public Dictionary<string, object> DocumentFields { get; }
 
-        public SandboxDocumentTextDataExtractionTaskResult(Dictionary<string, object> documentFields)
+        [JsonProperty(PropertyName = "document_id_photo")]
+        public SandboxDocumentIdPhoto DocumentIdPhoto { get; }
+
+        public SandboxDocumentTextDataExtractionTaskResult(
+            Dictionary<string, object> documentFields,
+            SandboxDocumentIdPhoto sandboxDocumentIdPhoto = null)
         {
             DocumentFields = documentFields;
+            DocumentIdPhoto = sandboxDocumentIdPhoto;
         }
     }
 }
