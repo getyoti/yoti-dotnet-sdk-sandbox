@@ -115,7 +115,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                name: Constants.UserProfile.FamilyNameAttribute,
+                name: Yoti.Auth.Constants.UserProfile.FamilyNameAttribute,
                 value: _someFamilyName);
         }
 
@@ -132,7 +132,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                Constants.UserProfile.FamilyNameAttribute,
+                Yoti.Auth.Constants.UserProfile.FamilyNameAttribute,
                 _someFamilyName,
                 anchors);
         }
@@ -147,7 +147,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.GivenNamesAttribute, _someGivenNames);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.GivenNamesAttribute, _someGivenNames);
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.GivenNamesAttribute, _someGivenNames, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.GivenNamesAttribute, _someGivenNames, anchors);
         }
 
         [Fact]
@@ -173,7 +173,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.FullNameAttribute, _someFullName);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.FullNameAttribute, _someFullName);
         }
 
         [Fact]
@@ -186,7 +186,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.FullNameAttribute, _someFullName, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.FullNameAttribute, _someFullName, anchors);
         }
 
         [Fact]
@@ -199,7 +199,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.GenderAttribute, _someGender);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.GenderAttribute, _someGender);
         }
 
         [Fact]
@@ -212,7 +212,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.GenderAttribute, _someGender, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.GenderAttribute, _someGender, anchors);
         }
 
         [Fact]
@@ -225,7 +225,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DateOfBirthAttribute, _someDoB);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, _someDoB);
         }
 
         [Fact]
@@ -238,7 +238,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DateOfBirthAttribute, _someDoB, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, _someDoB, anchors);
         }
 
         [Fact]
@@ -259,7 +259,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DateOfBirthAttribute, _someDoB);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, _someDoB);
         }
 
         [Fact]
@@ -280,7 +280,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DateOfBirthAttribute, _someDoB, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, _someDoB, anchors);
         }
 
         [Fact]
@@ -299,7 +299,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsDerivedAttribute(
                 result,
-                Constants.UserProfile.DateOfBirthAttribute,
+                Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute,
                 _dobUnder18,
                 "age_under:18");
         }
@@ -320,7 +320,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsDerivedAttribute(
                 result,
-                Constants.UserProfile.DateOfBirthAttribute,
+                Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute,
                 _dobOver18,
                 "age_over:18");
         }
@@ -346,12 +346,12 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 2);
             AttributeMatcher.AssertContainsDerivedAttribute(
                 result,
-                Constants.UserProfile.DateOfBirthAttribute,
+                Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute,
                 _dobOver18,
                 "age_over:18");
             AttributeMatcher.AssertContainsDerivedAttribute(
                 result,
-                Constants.UserProfile.DateOfBirthAttribute,
+                Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute,
                 _dobOver18,
                 "age_under:18");
         }
@@ -366,7 +366,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.PostalAddressAttribute, _somePostalAddress);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.PostalAddressAttribute, _somePostalAddress);
         }
 
         [Fact]
@@ -379,7 +379,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.PostalAddressAttribute, _somePostalAddress, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.PostalAddressAttribute, _somePostalAddress, anchors);
         }
 
         [Fact]
@@ -392,7 +392,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.StructuredPostalAddressAttribute, _somePostalAddress);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.StructuredPostalAddressAttribute, _somePostalAddress);
         }
 
         [Fact]
@@ -405,7 +405,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.StructuredPostalAddressAttribute, _somePostalAddress, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.StructuredPostalAddressAttribute, _somePostalAddress, anchors);
         }
 
         [Fact]
@@ -418,7 +418,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.NationalityAttribute, _someNationality);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.NationalityAttribute, _someNationality);
         }
 
         [Fact]
@@ -431,7 +431,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.NationalityAttribute, _someNationality, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.NationalityAttribute, _someNationality, anchors);
         }
 
         [Fact]
@@ -444,7 +444,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.PhoneNumberAttribute, _somePhoneNumber);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.PhoneNumberAttribute, _somePhoneNumber);
         }
 
         [Fact]
@@ -457,7 +457,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.PhoneNumberAttribute, _somePhoneNumber, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.PhoneNumberAttribute, _somePhoneNumber, anchors);
         }
 
         [Fact]
@@ -470,7 +470,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.EmailAddressAttribute, _someEmailAddress);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.EmailAddressAttribute, _someEmailAddress);
         }
 
         [Fact]
@@ -483,7 +483,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.EmailAddressAttribute, _someEmailAddress, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.EmailAddressAttribute, _someEmailAddress, anchors);
         }
 
         [Fact]
@@ -501,7 +501,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, "type country number");
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DocumentDetailsAttribute, "type country number");
         }
 
         [Fact]
@@ -521,7 +521,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                Constants.UserProfile.DocumentDetailsAttribute,
+                Yoti.Auth.Constants.UserProfile.DocumentDetailsAttribute,
                 "type country number",
                 anchors);
         }
@@ -536,7 +536,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails);
         }
 
         [Fact]
@@ -549,7 +549,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.DocumentDetailsAttribute, _someDocumentDetails, anchors);
         }
 
         [Fact]
@@ -569,7 +569,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                Constants.UserProfile.DocumentImagesAttribute,
+                Yoti.Auth.Constants.UserProfile.DocumentImagesAttribute,
                 _expectedDocumentImagesAttributeValue);
         }
 
@@ -590,7 +590,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                Constants.UserProfile.DocumentImagesAttribute,
+                Yoti.Auth.Constants.UserProfile.DocumentImagesAttribute,
                 _expectedDocumentImagesAttributeValue,
                 anchors);
         }
@@ -607,7 +607,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                Constants.UserProfile.SelfieAttribute,
+                Yoti.Auth.Constants.UserProfile.SelfieAttribute,
                 Conversion.BytesToBase64(
                     Encoding.UTF8.GetBytes(_someBase64Selfie)));
         }
@@ -624,7 +624,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             Assert.True(result.Count == 1);
             AttributeMatcher.AssertContainsAttribute(
                 result,
-                Constants.UserProfile.SelfieAttribute,
+                Yoti.Auth.Constants.UserProfile.SelfieAttribute,
                 Conversion.BytesToBase64(
                     Encoding.UTF8.GetBytes(_someBase64Selfie)),
                 anchors);
@@ -640,7 +640,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.SelfieAttribute, _someBase64Selfie);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.SelfieAttribute, _someBase64Selfie);
         }
 
         [Fact]
@@ -653,7 +653,7 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request
             ReadOnlyCollection<SandboxAttribute> result = yotiTokenRequest.SandboxAttributes;
 
             Assert.True(result.Count == 1);
-            AttributeMatcher.AssertContainsAttribute(result, Constants.UserProfile.SelfieAttribute, _someBase64Selfie, anchors);
+            AttributeMatcher.AssertContainsAttribute(result, Yoti.Auth.Constants.UserProfile.SelfieAttribute, _someBase64Selfie, anchors);
         }
 
         [Fact]

@@ -20,7 +20,7 @@ namespace Yoti.Auth.Sandbox.Profile.Request.ExtraData.ThirdParty
 
         public SandboxAttributeIssuanceDetailsBuilder WithExpiryDate(DateTime expiryDate)
         {
-            _expiryDate = expiryDate.ToString(Constants.Format.RFC3339PatternMilli, DateTimeFormatInfo.InvariantInfo);
+            _expiryDate = expiryDate.ToString(Yoti.Auth.Constants.Format.RFC3339PatternMilli, DateTimeFormatInfo.InvariantInfo);
             return this;
         }
 
