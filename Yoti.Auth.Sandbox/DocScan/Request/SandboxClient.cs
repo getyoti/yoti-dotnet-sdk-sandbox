@@ -10,7 +10,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
     public class SandboxClient
     {
         private const string _yotiDocScanSandboxPathPrefix = "/sandbox/idverify/v1";
-        private readonly Uri _defaultDocScanSandboxApiUrl = new Uri(Constants.Api.DefaultYotiHost + _yotiDocScanSandboxPathPrefix);
+        private readonly Uri _defaultDocScanSandboxApiUrl = new Uri(Yoti.Auth.Constants.Api.DefaultYotiHost + _yotiDocScanSandboxPathPrefix);
 
         private readonly HttpClient _httpClient;
         internal Uri DocScanSandboxApiUrl { get; private set; }
@@ -32,68 +32,54 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 
         public void ConfigureSessionResponse(string sessionId, ResponseConfig sandboxExpection)
         {
-            try
-            {
-                string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
-                    sandboxExpection,
-                    new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore
-                    });
-                byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
-
-                Yoti.Auth.Web.Request request = new RequestBuilder()
-                    .WithKeyPair(_keyPair)
-                    .WithBaseUri(DocScanSandboxApiUrl)
-                    .WithEndpoint($"/sessions/{sessionId}/response-config")
-                    .WithHttpMethod(HttpMethod.Put)
-                    .WithContent(body)
-                    .WithQueryParam("sdkId", _sdkId)
-                    .Build();
-
-                HttpResponseMessage response = request.Execute(_httpClient).Result;
-
-                if (!response.IsSuccessStatusCode)
+            string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
+                sandboxExpection,
+                new JsonSerializerSettings
                 {
-                    Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
-                }
-            }
-            catch (Exception ex)
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
+
+            Yoti.Auth.Web.Request request = new RequestBuilder()
+                .WithKeyPair(_keyPair)
+                .WithBaseUri(DocScanSandboxApiUrl)
+                .WithEndpoint($"/sessions/{sessionId}/response-config")
+                .WithHttpMethod(HttpMethod.Put)
+                .WithContent(body)
+                .WithQueryParam("sdkId", _sdkId)
+                .Build();
+
+            HttpResponseMessage response = request.Execute(_httpClient).Result;
+
+            if (!response.IsSuccessStatusCode)
             {
-                throw new SandboxException(Properties.Resources.DocScanSessionResponseError, ex);
+                Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
             }
         }
 
         public void ConfigureApplicationResponse(ResponseConfig sandboxExpection)
         {
-            try
+            string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
+               sandboxExpection,
+               new JsonSerializerSettings
+               {
+                   NullValueHandling = NullValueHandling.Ignore
+               });
+            byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
+
+            Yoti.Auth.Web.Request request = new RequestBuilder()
+                .WithKeyPair(_keyPair)
+                .WithBaseUri(DocScanSandboxApiUrl)
+                .WithEndpoint($"/apps/{_sdkId}/response-config")
+                .WithHttpMethod(HttpMethod.Put)
+                .WithContent(body)
+                .Build();
+
+            HttpResponseMessage response = request.Execute(_httpClient).Result;
+
+            if (!response.IsSuccessStatusCode)
             {
-                string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
-                   sandboxExpection,
-                   new JsonSerializerSettings
-                   {
-                       NullValueHandling = NullValueHandling.Ignore
-                   });
-                byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
-
-                Yoti.Auth.Web.Request request = new RequestBuilder()
-                    .WithKeyPair(_keyPair)
-                    .WithBaseUri(DocScanSandboxApiUrl)
-                    .WithEndpoint($"/apps/{_sdkId}/response-config")
-                    .WithHttpMethod(HttpMethod.Put)
-                    .WithContent(body)
-                    .Build();
-
-                HttpResponseMessage response = request.Execute(_httpClient).Result;
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new SandboxException(Properties.Resources.DocScanApplicationResponseError, ex);
+                Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
             }
         }
     }

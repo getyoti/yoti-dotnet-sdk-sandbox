@@ -10,7 +10,7 @@
             SandboxCheckReport report = new SandboxCheckReport(Recommendation, Breakdown);
             SandboxCheckResult result = new SandboxCheckResult(report);
 
-            return new SandboxLivenessCheck(result, Constants.DocScanConstants.Zoom);
+            return new SandboxLivenessCheck(result, Yoti.Auth.Constants.DocScanConstants.Zoom);
         }
     }
 }

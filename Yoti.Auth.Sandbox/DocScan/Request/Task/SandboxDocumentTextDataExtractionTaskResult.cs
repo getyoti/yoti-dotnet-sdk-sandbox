@@ -11,12 +11,22 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
         [JsonProperty(PropertyName = "document_id_photo")]
         public SandboxDocumentIdPhoto DocumentIdPhoto { get; }
 
+        [JsonProperty(PropertyName = "detected_country")]
+        public string DetectedCountry { get; }
+
+        [JsonProperty(PropertyName = "recommendation")]
+        public SandboxDocumentTextDataExtractionRecommendation Recommendation { get; }
+
         public SandboxDocumentTextDataExtractionTaskResult(
             Dictionary<string, object> documentFields,
-            SandboxDocumentIdPhoto sandboxDocumentIdPhoto = null)
+            SandboxDocumentIdPhoto sandboxDocumentIdPhoto = null,
+            string detectedCountry = null,
+            SandboxDocumentTextDataExtractionRecommendation recommendation = null)
         {
             DocumentFields = documentFields;
             DocumentIdPhoto = sandboxDocumentIdPhoto;
+            DetectedCountry = detectedCountry;
+            Recommendation = recommendation;
         }
     }
 }
