@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using Yoti.Auth.Sandbox.DocScan.Request.Task;
 
@@ -8,8 +5,6 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
 {
     public class SandboxDocumentTextDataExtractionRecommendationTests
     {
-        private readonly string _someReasonDetail = "someReasonDetail";
-
         [Fact]
         public void ShouldBuildWithRecommendationForProgress()
         {

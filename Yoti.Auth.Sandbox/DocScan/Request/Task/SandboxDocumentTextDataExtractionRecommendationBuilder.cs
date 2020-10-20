@@ -7,19 +7,19 @@
 
         public SandboxDocumentTextDataExtractionRecommendationBuilder ForProgress()
         {
-            _recommendationvalue = Constants.DocScan.Progress;
+            _recommendationvalue = Constants.DocScanSandbox.Progress;
             return this;
         }
 
         public SandboxDocumentTextDataExtractionRecommendationBuilder ForShouldTryAgain()
         {
-            _recommendationvalue = Constants.DocScan.ShouldTryAgain;
+            _recommendationvalue = Constants.DocScanSandbox.ShouldTryAgain;
             return this;
         }
 
         public SandboxDocumentTextDataExtractionRecommendationBuilder ForMustTryAgain()
         {
-            _recommendationvalue = Constants.DocScan.MustTryAgain;
+            _recommendationvalue = Constants.DocScanSandbox.MustTryAgain;
             return this;
         }
 

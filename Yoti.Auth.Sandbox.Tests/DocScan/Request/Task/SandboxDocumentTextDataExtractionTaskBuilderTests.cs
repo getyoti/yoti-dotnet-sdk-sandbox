@@ -53,6 +53,30 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
         }
 
         [Fact]
+        public void ShouldBuildWithDocumentFilter()
+        {
+            var documentFilter = new SandboxDocumentFilterBuilder().Build();
+
+            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+                .WithDocumentFilter(documentFilter)
+                .Build();
+
+            Assert.Equal(documentFilter, task.DocumentFilter);
+        }
+
+        [Fact]
+        public void ShouldBuildWithRecommendation()
+        {
+            var recommendation = new SandboxDocumentTextDataExtractionRecommendationBuilder().Build();
+
+            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+                .WithRecommendation(recommendation)
+                .Build();
+
+            Assert.Equal(recommendation, task.Result.Recommendation);
+        }
+
+        [Fact]
         public void ShouldBuildWithoutMethods()
         {
             var task = new SandboxDocumentTextDataExtractionTaskBuilder().Build();
