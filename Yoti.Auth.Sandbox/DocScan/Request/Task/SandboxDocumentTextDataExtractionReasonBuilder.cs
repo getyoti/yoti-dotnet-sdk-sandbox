@@ -7,13 +7,13 @@
 
         public SandboxDocumentTextDataExtractionReasonBuilder ForQuality()
         {
-            _value = Constants.DocScan.Quality;
+            _value = Constants.DocScanSandbox.Quality;
             return this;
         }
 
         public SandboxDocumentTextDataExtractionReasonBuilder ForUserError()
         {
-            _value = Constants.DocScan.UserError;
+            _value = Constants.DocScanSandbox.UserError;
             return this;
         }
 

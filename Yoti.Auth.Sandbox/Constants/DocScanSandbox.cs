@@ -1,6 +1,6 @@
 ﻿namespace Yoti.Auth.Sandbox.Constants
 {
-    public static class DocScan
+    public static class DocScanSandbox
 
     {
         public const string Progress = "PROGRESS";
