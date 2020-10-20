@@ -8,6 +8,8 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
         private Dictionary<string, object> _documentFields;
         private SandboxDocumentFilter _documentFilter;
         private SandboxDocumentIdPhoto _documentIdPhoto;
+        private string _detectedCountry;
+        private SandboxDocumentTextDataExtractionRecommendation _recommendation;
 
         public SandboxDocumentTextDataExtractionTaskBuilder WithDocumentField(string key, object value)
         {
@@ -38,9 +40,21 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
             return this;
         }
 
+        public SandboxDocumentTextDataExtractionTaskBuilder WithDetectedCountry(string detectedCountry)
+        {
+            _detectedCountry = detectedCountry;
+            return this;
+        }
+
+        public SandboxDocumentTextDataExtractionTaskBuilder WithRecommendation(SandboxDocumentTextDataExtractionRecommendation recommendation)
+        {
+            _recommendation = recommendation;
+            return this;
+        }
+
         public SandboxDocumentTextDataExtractionTask Build()
         {
-            SandboxDocumentTextDataExtractionTaskResult result = new SandboxDocumentTextDataExtractionTaskResult(_documentFields, _documentIdPhoto);
+            SandboxDocumentTextDataExtractionTaskResult result = new SandboxDocumentTextDataExtractionTaskResult(_documentFields, _documentIdPhoto, _detectedCountry, _recommendation);
             return new SandboxDocumentTextDataExtractionTask(result, _documentFilter);
         }
     }

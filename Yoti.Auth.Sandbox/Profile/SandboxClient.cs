@@ -12,7 +12,7 @@ namespace Yoti.Auth.Sandbox.Profile
     public class SandboxClient
     {
         private const string _yotiSandboxPathPrefix = "/sandbox/v1";
-        private readonly Uri _defaultSandboxApiUrl = new Uri(Constants.Api.DefaultYotiHost + _yotiSandboxPathPrefix);
+        private readonly Uri _defaultSandboxApiUrl = new Uri(Yoti.Auth.Constants.Api.DefaultYotiHost + _yotiSandboxPathPrefix);
         private readonly HttpClient _httpClient;
         internal Uri SandboxApiUri { get; private set; }
         private readonly string _sdkId;
@@ -50,7 +50,7 @@ namespace Yoti.Auth.Sandbox.Profile
                     .WithEndpoint($"/apps/{_sdkId}/tokens")
                     .WithHttpMethod(HttpMethod.Post)
                     .WithContent(body)
-                    .WithContentHeader(Constants.Api.ContentTypeHeader, Constants.Api.ContentTypeJson)
+                    .WithContentHeader(Yoti.Auth.Constants.Api.ContentTypeHeader, Yoti.Auth.Constants.Api.ContentTypeJson)
                     .Build();
 
                 HttpResponseMessage response = request.Execute(_httpClient).Result;
