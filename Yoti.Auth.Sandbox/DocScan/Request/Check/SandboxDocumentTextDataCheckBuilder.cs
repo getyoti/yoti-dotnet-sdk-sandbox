@@ -5,10 +5,14 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Check
     public class SandboxDocumentTextDataCheckBuilder
         : SandboxDocumentCheckBuilder<SandboxDocumentTextDataCheckBuilder, SandboxDocumentTextDataCheck>
     {
-        private Dictionary<string, object> _documentFields = new Dictionary<string, object>();
+        private Dictionary<string, object> _documentFields;
 
         public SandboxDocumentTextDataCheckBuilder WithDocumentField(string key, object value)
         {
+            if (_documentFields == null)
+            {
+                _documentFields = new Dictionary<string, object>();
+            }
             _documentFields.Add(key, value);
             return this;
         }

@@ -46,6 +46,19 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Check
         }
 
         [Fact]
+        public void ShouldBuildWithoutDocumentFields()
+        {
+            var check = new SandboxDocumentTextDataCheckBuilder()
+                .WithBreakdown(_someBreakDown)
+                .WithRecommendation(_someRecommendation)
+                .Build();
+
+            var sandboxTextDataCheckResult = (SandboxDocumentTextDataCheckResult)check.Result;
+
+            Assert.Null(sandboxTextDataCheckResult.DocumentFields);
+        }
+
+        [Fact]
         public void ShouldBuildWithDocumentFields()
         {
             var documentFields = new Dictionary<string, object>
