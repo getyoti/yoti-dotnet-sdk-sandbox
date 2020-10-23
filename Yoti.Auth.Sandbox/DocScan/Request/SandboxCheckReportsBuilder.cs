@@ -10,6 +10,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
         private readonly List<SandboxLivenessCheck> _livenessChecks;
         private readonly List<SandboxDocumentFaceMatchCheck> _documentFaceMatchChecks;
         private readonly List<SandboxIdDocumentComparisonCheck> _idDocumentComparisonChecks;
+        private readonly List<SandboxSupplementaryDocTextDataCheck> _supplementaryDocTextDataChecks;
         private int? _asyncReportDelay;
 
         public SandboxCheckReportsBuilder()
@@ -20,6 +21,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             _livenessChecks = new List<SandboxLivenessCheck>();
             _documentFaceMatchChecks = new List<SandboxDocumentFaceMatchCheck>();
             _idDocumentComparisonChecks = new List<SandboxIdDocumentComparisonCheck>();
+            _supplementaryDocTextDataChecks = new List<SandboxSupplementaryDocTextDataCheck>();
         }
 
         public SandboxCheckReportsBuilder WithDocumentTextDataCheck(SandboxDocumentTextDataCheck textDataCheckReport)
@@ -52,6 +54,12 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             return this;
         }
 
+        public SandboxCheckReportsBuilder WithSupplementaryDocTextDataCheck(SandboxSupplementaryDocTextDataCheck sandboxSupplementaryDocTextDataCheck)
+        {
+            _supplementaryDocTextDataChecks.Add(sandboxSupplementaryDocTextDataCheck);
+            return this;
+        }
+
         public SandboxCheckReportsBuilder WithAsyncReportDelay(int asyncReportDelay)
         {
             _asyncReportDelay = asyncReportDelay;
@@ -66,7 +74,8 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
                 _livenessChecks,
                 _documentFaceMatchChecks,
                 _asyncReportDelay,
-                _idDocumentComparisonChecks);
+                _idDocumentComparisonChecks,
+                _supplementaryDocTextDataChecks);
         }
     }
 }

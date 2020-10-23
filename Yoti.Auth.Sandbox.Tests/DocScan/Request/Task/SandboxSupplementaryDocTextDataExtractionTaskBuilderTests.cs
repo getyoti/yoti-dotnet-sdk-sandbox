@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using Yoti.Auth.Sandbox.DocScan.Request.Task;
 
 namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
 {
-    public class SandboxDocumentTextDataExtractionTaskBuilderTest
+    public class SandboxSupplementaryDocTextDataExtractionTaskBuilderTests
     {
         private readonly string _someKey = "someKey";
         private readonly string _someValue = "someValue";
@@ -16,7 +15,7 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
         [Fact]
         public void ShouldBuildWithDocumentField()
         {
-            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder()
                 .WithDocumentField(_someKey, _someValue)
                 .Build();
 
@@ -26,7 +25,7 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
         [Fact]
         public void ShouldBuildWithDocumentFieldMultiple()
         {
-            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder()
                 .WithDocumentField(_someKey, _someValue)
                 .WithDocumentField(_someOtherKey, _someOtherValue)
                 .Build();
@@ -44,7 +43,7 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
                 { _someOtherKey, _someOtherValue }
             };
 
-            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder()
                 .WithDocumentFields(documentFields)
                 .Build();
 
@@ -53,26 +52,45 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
         }
 
         [Fact]
-        public void ShouldBuildWithoutMethods()
+        public void ShouldBuildWithDocumentFilter()
         {
-            var task = new SandboxDocumentTextDataExtractionTaskBuilder().Build();
+            var documentFilter = new SandboxDocumentFilterBuilder().Build();
 
-            Assert.Null(task.Result.DocumentFields);
-            Assert.Null(task.Result.DocumentIdPhoto);
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder()
+                .WithDocumentFilter(documentFilter)
+                .Build();
+
+            Assert.Equal(documentFilter, task.DocumentFilter);
         }
 
         [Fact]
-        public void ShouldBuildWithDocumentIdPhoto()
+        public void ShouldBuildWithDetectedCountry()
         {
-            byte[] imageBytes = Encoding.UTF8.GetBytes("someImage");
-            string contentType = "image/jpeg";
-
-            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
-                .WithDocumentIdPhoto(contentType, imageBytes)
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder()
+                .WithDetectedCountry("USA")
                 .Build();
 
-            Assert.Equal(contentType, task.Result.DocumentIdPhoto.ContentType);
-            Assert.Equal(Convert.ToBase64String(imageBytes), task.Result.DocumentIdPhoto.Base64Data);
+            Assert.Equal("USA", task.Result.DetectedCountry);
+        }
+
+        [Fact]
+        public void ShouldBuildWithRecommendation()
+        {
+            var recommendation = new SandboxDocumentTextDataExtractionRecommendationBuilder().ForMustTryAgain().Build();
+
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder()
+                .WithRecommendation(recommendation)
+                .Build();
+
+            Assert.Equal(recommendation, task.Result.Recommendation);
+        }
+
+        [Fact]
+        public void ShouldBuildWithoutMethods()
+        {
+            var task = new SandboxSupplementaryDocTextDataExtractionTaskBuilder().Build();
+
+            Assert.Null(task.Result.DocumentFields);
         }
     }
 }
