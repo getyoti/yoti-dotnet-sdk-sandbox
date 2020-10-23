@@ -50,14 +50,29 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
                         .WithValue("APPROVE")
                         .Build())
                     .Build())
+                .WithIdDocumentComparisonCheck(
+                    new SandboxIdDocumentComparisonCheckBuilder()
+                    .WithRecommendation(
+                        new SandboxRecommendationBuilder()
+                        .WithValue("APPROVE")
+                        .Build())
+                    .Build())
+                 .WithSupplementaryDocTextDataCheck(
+                    new SandboxSupplementaryDocTextDataCheckBuilder()
+                    .WithRecommendation(
+                        new SandboxRecommendationBuilder()
+                        .WithValue("APPROVE")
+                        .Build())
+                    .Build())
                 .Build();
 
             Assert.Equal(10, sandboxCheckReport.AsyncReportDelay);
-            Assert.NotNull(sandboxCheckReport.DocumentAuthenticityCheck);
-            Assert.NotNull(sandboxCheckReport.DocumentFaceMatchCheck);
-            Assert.NotNull(sandboxCheckReport.TextDataCheck);
+            Assert.NotEmpty(sandboxCheckReport.DocumentAuthenticityCheck);
+            Assert.NotEmpty(sandboxCheckReport.DocumentFaceMatchCheck);
+            Assert.NotEmpty(sandboxCheckReport.TextDataCheck);
             Assert.Equal("ZOOM", sandboxCheckReport.LivenessChecks.Single().LivenessType);
-            Assert.NotNull(sandboxCheckReport.IdDocumentComparisonChecks);
+            Assert.NotEmpty(sandboxCheckReport.IdDocumentComparisonChecks);
+            Assert.NotEmpty(sandboxCheckReport.SupplementaryDocTextDataChecks);
         }
     }
 }

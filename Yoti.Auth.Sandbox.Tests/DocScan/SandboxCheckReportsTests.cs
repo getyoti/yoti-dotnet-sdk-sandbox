@@ -16,7 +16,8 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
                 new List<SandboxLivenessCheck>(),
                 new List<SandboxDocumentFaceMatchCheck>(),
                 10,
-                new List<SandboxIdDocumentComparisonCheck>());
+                new List<SandboxIdDocumentComparisonCheck>(),
+                new List<SandboxSupplementaryDocTextDataCheck>());
 
             Assert.NotNull(sandboxCheckReport.TextDataCheck);
             Assert.NotNull(sandboxCheckReport.DocumentAuthenticityCheck);
@@ -24,10 +25,11 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
             Assert.NotNull(sandboxCheckReport.DocumentFaceMatchCheck);
             Assert.Equal(10, sandboxCheckReport.AsyncReportDelay);
             Assert.NotNull(sandboxCheckReport.IdDocumentComparisonChecks);
+            Assert.NotNull(sandboxCheckReport.SupplementaryDocTextDataChecks);
         }
 
         [Fact]
-        public static void ShouldCreateWithoutIdDocumentComparison()
+        public static void ShouldCreateWithoutOptionals()
         {
             var sandboxCheckReport = new SandboxCheckReports(
                 new List<SandboxDocumentTextDataCheck>(),
@@ -41,7 +43,8 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
             Assert.NotNull(sandboxCheckReport.LivenessChecks);
             Assert.NotNull(sandboxCheckReport.DocumentFaceMatchCheck);
             Assert.Equal(10, sandboxCheckReport.AsyncReportDelay);
-            Assert.NotNull(sandboxCheckReport.IdDocumentComparisonChecks);
+            Assert.Empty(sandboxCheckReport.IdDocumentComparisonChecks);
+            Assert.Empty(sandboxCheckReport.SupplementaryDocTextDataChecks);
         }
     }
 }
