@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Xunit;
 using Yoti.Auth.Sandbox.DocScan.Request.Task;
-using System;
-using System.Text;
 
 namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
 {
