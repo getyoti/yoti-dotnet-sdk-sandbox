@@ -6,7 +6,7 @@ using Yoti.Auth.Sandbox.DocScan.Request.Task;
 
 namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
 {
-    public class SandboxDocumentTextDataExtractionTaskBuilderTest
+    public class SandboxDocumentTextDataExtractionTaskBuilderTests
     {
         private readonly string _someKey = "someKey";
         private readonly string _someValue = "someValue";
@@ -53,6 +53,30 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
         }
 
         [Fact]
+        public void ShouldBuildWithDocumentFilter()
+        {
+            var documentFilter = new SandboxDocumentFilterBuilder().Build();
+
+            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+                .WithDocumentFilter(documentFilter)
+                .Build();
+
+            Assert.Equal(documentFilter, task.DocumentFilter);
+        }
+
+        [Fact]
+        public void ShouldBuildWithRecommendation()
+        {
+            var recommendation = new SandboxDocumentTextDataExtractionRecommendationBuilder().Build();
+
+            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+                .WithRecommendation(recommendation)
+                .Build();
+
+            Assert.Equal(recommendation, task.Result.Recommendation);
+        }
+
+        [Fact]
         public void ShouldBuildWithoutMethods()
         {
             var task = new SandboxDocumentTextDataExtractionTaskBuilder().Build();
@@ -73,6 +97,16 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan.Request.Task
 
             Assert.Equal(contentType, task.Result.DocumentIdPhoto.ContentType);
             Assert.Equal(Convert.ToBase64String(imageBytes), task.Result.DocumentIdPhoto.Base64Data);
+        }
+
+        [Fact]
+        public void ShouldBuildWithDetectedCountry()
+        {
+            var task = new SandboxDocumentTextDataExtractionTaskBuilder()
+                .WithDetectedCountry("GBR")
+                .Build();
+
+            Assert.Equal("GBR", task.Result.DetectedCountry);
         }
     }
 }

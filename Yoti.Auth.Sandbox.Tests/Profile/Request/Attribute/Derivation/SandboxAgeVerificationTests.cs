@@ -84,9 +84,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute.Derivation
                 .Build()
                 .ToAttribute();
 
-            Assert.Equal(Constants.UserProfile.DateOfBirthAttribute, result.Name);
+            Assert.Equal(Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, result.Name);
             Assert.Equal(_validDateString, result.Value);
-            Assert.Equal($"{Constants.UserProfile.AgeOverAttribute}:{21}", result.Derivation);
+            Assert.Equal($"{Yoti.Auth.Constants.UserProfile.AgeOverAttribute}:{21}", result.Derivation);
 #pragma warning disable 0618
             Assert.Equal("False", result.Optional); //NOSONAR
 #pragma warning restore 0618
@@ -102,9 +102,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute.Derivation
                 .Build()
                 .ToAttribute();
 
-            Assert.Equal(Constants.UserProfile.DateOfBirthAttribute, result.Name);
+            Assert.Equal(Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, result.Name);
             Assert.Equal(_validDateString, result.Value);
-            Assert.Equal($"{Constants.UserProfile.AgeUnderAttribute}:{16}", result.Derivation);
+            Assert.Equal($"{Yoti.Auth.Constants.UserProfile.AgeUnderAttribute}:{16}", result.Derivation);
 #pragma warning disable 0618
             Assert.Equal("False", result.Optional); //NOSONAR
 #pragma warning restore 0618
@@ -122,9 +122,9 @@ namespace Yoti.Auth.Sandbox.Tests.Profile.Request.Attribute.Derivation
                 .Build()
                 .ToAttribute();
 
-            Assert.Equal(Constants.UserProfile.DateOfBirthAttribute, result.Name);
+            Assert.Equal(Yoti.Auth.Constants.UserProfile.DateOfBirthAttribute, result.Name);
             Assert.Equal(_validDateString, result.Value);
-            Assert.Equal($"{Constants.UserProfile.AgeUnderAttribute}:{16}", result.Derivation);
+            Assert.Equal($"{Yoti.Auth.Constants.UserProfile.AgeUnderAttribute}:{16}", result.Derivation);
 #pragma warning disable 0618
             Assert.Equal("False", result.Optional); //NOSONAR
 #pragma warning restore 0618

@@ -5,12 +5,16 @@ namespace Yoti.Auth.Sandbox.DocScan.Request.Task
 {
     public class SandboxTaskResults
     {
-        [JsonProperty(PropertyName = Constants.DocScanConstants.IdDocumentTextDataExtraction)]
+        [JsonProperty(PropertyName = "ID_DOCUMENT_TEXT_DATA_EXTRACTION")]
         public List<SandboxDocumentTextDataExtractionTask> TextDataExtractionTasks { get; }
 
-        public SandboxTaskResults(List<SandboxDocumentTextDataExtractionTask> textDataExtractionTasks)
+        [JsonProperty(PropertyName = "SUPPLEMENTARY_DOCUMENT_TEXT_DATA_EXTRACTION")]
+        public List<SandboxSupplementaryDocTextDataExtractionTask> SupplementaryDocTextDataExtractionTasks { get; }
+
+        public SandboxTaskResults(List<SandboxDocumentTextDataExtractionTask> textDataExtractionTasks, List<SandboxSupplementaryDocTextDataExtractionTask> supplementaryDocTextDataExtractionTask = null)
         {
             TextDataExtractionTasks = textDataExtractionTasks;
+            SupplementaryDocTextDataExtractionTasks = supplementaryDocTextDataExtractionTask;
         }
     }
 }

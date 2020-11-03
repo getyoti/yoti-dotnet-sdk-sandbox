@@ -93,7 +93,7 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
                     _sandboxResponseConfig);
                 });
 
-                Assert.Contains("Error when setting up Doc Scan session response", exception.Message, StringComparison.Ordinal);
+                Assert.Contains("Failed validation - Status Code: '400' (BadRequest). Content: '{}'", exception.Message, StringComparison.Ordinal);
             };
         }
 
@@ -161,7 +161,7 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
                     _sandboxResponseConfig);
                 });
 
-                Assert.Contains("Error when setting up Doc Scan application response", exception.Message, StringComparison.Ordinal);
+                Assert.Contains("Failed validation - Status Code: '400' (BadRequest). Content: '{}'", exception.Message, StringComparison.Ordinal);
             };
         }
     }
