@@ -64,6 +64,13 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
                         .WithValue("APPROVE")
                         .Build())
                     .Build())
+                  .WithThirdPartyIdentityCheck(
+                    new SandboxThirdPartyIdentityCheckBuilder()
+                    .WithRecommendation(
+                        new SandboxRecommendationBuilder()
+                        .WithValue("APPROVE")
+                        .Build())
+                    .Build())
                 .Build();
 
             Assert.Equal(10, sandboxCheckReport.AsyncReportDelay);
