@@ -13,7 +13,8 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             List<SandboxDocumentFaceMatchCheck> documentFaceMatchChecks,
             int? asyncReportDelay,
             List<SandboxIdDocumentComparisonCheck> idDocumentComparisonChecks = null,
-            List<SandboxSupplementaryDocTextDataCheck> supplementaryDocTextDataChecks = null)
+            List<SandboxSupplementaryDocTextDataCheck> supplementaryDocTextDataChecks = null,
+            SandboxThirdPartyIdentityCheck thirdPartyIdentityCheck = null)
         {
             if (idDocumentComparisonChecks == null)
             {
@@ -31,6 +32,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             DocumentFaceMatchCheck = documentFaceMatchChecks;
             IdDocumentComparisonChecks = idDocumentComparisonChecks;
             SupplementaryDocTextDataChecks = supplementaryDocTextDataChecks;
+            ThirdPartyIdentityCheck = thirdPartyIdentityCheck;
             AsyncReportDelay = asyncReportDelay;
         }
 
@@ -51,6 +53,9 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 
         [JsonProperty(PropertyName = "SUPPLEMENTARY_DOCUMENT_TEXT_DATA_CHECK")]
         public List<SandboxSupplementaryDocTextDataCheck> SupplementaryDocTextDataChecks { get; }
+
+        [JsonProperty(PropertyName = "THIRD_PARTY_IDENTITY")]
+        public SandboxThirdPartyIdentityCheck ThirdPartyIdentityCheck { get; }
 
         [JsonProperty(PropertyName = "async_report_delay")]
         public int? AsyncReportDelay { get; }

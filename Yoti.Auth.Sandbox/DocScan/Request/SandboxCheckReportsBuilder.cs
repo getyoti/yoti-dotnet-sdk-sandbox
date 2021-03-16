@@ -11,6 +11,7 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
         private readonly List<SandboxDocumentFaceMatchCheck> _documentFaceMatchChecks;
         private readonly List<SandboxIdDocumentComparisonCheck> _idDocumentComparisonChecks;
         private readonly List<SandboxSupplementaryDocTextDataCheck> _supplementaryDocTextDataChecks;
+        private SandboxThirdPartyIdentityCheck _thirdPartyIdentityCheck;
         private int? _asyncReportDelay;
 
         public SandboxCheckReportsBuilder()
@@ -60,6 +61,12 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
             return this;
         }
 
+        public SandboxCheckReportsBuilder WithThirdPartyIdentityCheck(SandboxThirdPartyIdentityCheck sandboxThirdPartyIdentityCheck)
+        {
+            _thirdPartyIdentityCheck = sandboxThirdPartyIdentityCheck;
+            return this;
+        }
+
         public SandboxCheckReportsBuilder WithAsyncReportDelay(int asyncReportDelay)
         {
             _asyncReportDelay = asyncReportDelay;
@@ -75,7 +82,8 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
                 _documentFaceMatchChecks,
                 _asyncReportDelay,
                 _idDocumentComparisonChecks,
-                _supplementaryDocTextDataChecks);
+                _supplementaryDocTextDataChecks,
+                _thirdPartyIdentityCheck);
         }
     }
 }
