@@ -58,13 +58,12 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
                     Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
                 }
             }
+            catch (SandboxException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
-                if (ex is SandboxException)
-                {
-                    throw;
-                }
-
                 throw new SandboxException(Properties.Resources.DocScanSessionResponseError, ex);
             }
         }
@@ -96,13 +95,12 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
                     Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
                 }
             }
+            catch (SandboxException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
-                if (ex is SandboxException)
-                {
-                    throw;
-                }
-
                 throw new SandboxException(Properties.Resources.DocScanApplicationResponseError, ex);
             }
         }
