@@ -62,9 +62,11 @@ namespace Yoti.Auth.Sandbox.Tests.DocScan
                     .WithKeyPair(KeyPair.Get())
                     .Build();
 
-                docScanSandboxClient.ConfigureSessionResponse(
+                var ex = Record.Exception(() => docScanSandboxClient.ConfigureSessionResponse(
                     _someSessionId,
-                    _sandboxResponseConfig);
+                    _sandboxResponseConfig));
+
+                Assert.Null(ex);
             };
         }
 
