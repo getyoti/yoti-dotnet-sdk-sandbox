@@ -12,7 +12,7 @@
     <PackageId>Yoti.Sandbox</PackageId>
     <PackageProjectUrl>https://developers.yoti.com/yoti-app/web-integration</PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.6.0</Version>
+    <Version>1.6.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
