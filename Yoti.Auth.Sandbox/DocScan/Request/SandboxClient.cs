@@ -32,54 +32,76 @@ namespace Yoti.Auth.Sandbox.DocScan.Request
 
         public void ConfigureSessionResponse(string sessionId, ResponseConfig sandboxExpection)
         {
-            string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
+            try
+            {
+                string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
                 sandboxExpection,
                 new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore
                 });
-            byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
+                byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
 
-            Yoti.Auth.Web.Request request = new RequestBuilder()
-                .WithKeyPair(_keyPair)
-                .WithBaseUri(DocScanSandboxApiUrl)
-                .WithEndpoint($"/sessions/{sessionId}/response-config")
-                .WithHttpMethod(HttpMethod.Put)
-                .WithContent(body)
-                .WithQueryParam("sdkId", _sdkId)
-                .Build();
+                Yoti.Auth.Web.Request request = new RequestBuilder()
+                    .WithKeyPair(_keyPair)
+                    .WithBaseUri(DocScanSandboxApiUrl)
+                    .WithEndpoint($"/sessions/{sessionId}/response-config")
+                    .WithHttpMethod(HttpMethod.Put)
+                    .WithContent(body)
+                    .WithQueryParam("sdkId", _sdkId)
+                    .Build();
 
-            HttpResponseMessage response = request.Execute(_httpClient).Result;
+                HttpResponseMessage response = request.Execute(_httpClient).Result;
 
-            if (!response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
+                {
+                    Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
+                }
+            }
+            catch (SandboxException)
             {
-                Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new SandboxException(Properties.Resources.DocScanSessionResponseError, ex);
             }
         }
 
         public void ConfigureApplicationResponse(ResponseConfig sandboxExpection)
         {
-            string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
+            try
+            {
+                string serializedSandboxResponseConfig = JsonConvert.SerializeObject(
                sandboxExpection,
                new JsonSerializerSettings
                {
                    NullValueHandling = NullValueHandling.Ignore
                });
-            byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
+                byte[] body = Encoding.UTF8.GetBytes(serializedSandboxResponseConfig);
 
-            Yoti.Auth.Web.Request request = new RequestBuilder()
-                .WithKeyPair(_keyPair)
-                .WithBaseUri(DocScanSandboxApiUrl)
-                .WithEndpoint($"/apps/{_sdkId}/response-config")
-                .WithHttpMethod(HttpMethod.Put)
-                .WithContent(body)
-                .Build();
+                Yoti.Auth.Web.Request request = new RequestBuilder()
+                    .WithKeyPair(_keyPair)
+                    .WithBaseUri(DocScanSandboxApiUrl)
+                    .WithEndpoint($"/apps/{_sdkId}/response-config")
+                    .WithHttpMethod(HttpMethod.Put)
+                    .WithContent(body)
+                    .Build();
 
-            HttpResponseMessage response = request.Execute(_httpClient).Result;
+                HttpResponseMessage response = request.Execute(_httpClient).Result;
 
-            if (!response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
+                {
+                    Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
+                }
+            }
+            catch (SandboxException)
             {
-                Response.CreateYotiExceptionFromStatusCode<SandboxException>(response);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new SandboxException(Properties.Resources.DocScanApplicationResponseError, ex);
             }
         }
     }
