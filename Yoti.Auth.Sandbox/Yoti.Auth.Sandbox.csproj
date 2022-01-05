@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;netcoreapp3.1;net48;</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;netcoreapp3.1;net472;net48;</TargetFrameworks>
 		<Authors>Yoti</Authors>
 		<Description>Yoti .NET SDK Sandbox</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
