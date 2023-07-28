@@ -14,7 +14,7 @@ Welcome to the Yoti .NET Sandbox. This repo contains the tools you need to test 
 - .NET Core App 3.1
 - .NET 4.8
 
-Please email [clientsupport@yoti.com](mailto:clientsupport@yoti.com) if you require a Target Framework which is not listed here.
+Please contact us here: https://support.yoti.com if you require a Target Framework which is not listed here.
 
 ## Installing the Sandbox
 
